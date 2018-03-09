@@ -1,0 +1,159 @@
+<template name="Order_show_page">
+  {{#if Template.subscriptionsReady}}
+    {{#staggering effect='fadeInDown'}}
+      <div class='wrapper'>
+        <div class='row'>
+          {{#pageTitle title=(_ "Order")}}
+            <h6 class='text-muted'>{{_ "Created:"}} {{timeFromCreation order.createdAt}} {{_ "by"}} {{order.authorName}} {{order.authorLastName}}</h6>
+            {{#if order.destiny}}
+              <h1>{{order.destinyName}}</h1>
+               <h6 class='text-muted'>
+                 {{_ "Payment condition"}} {{order.paymentDays}} {{_ "days"}},
+                 {{_ "with"}} {{order.paymentMethodName}}
+               </h6>
+             {{/if}}
+          {{/pageTitle}}
+        </div>
+        {{#if order.destiny}}
+          <div class='row'>
+          <div class="col col-xs-12 col-md-6 col-lg-4">
+            <!-- ...........................FILES...........         -->
+            {{#panel title=(_ "Files") built=true}}
+              {{#if uploadingFile}}
+                <h4>{{_ "What is this file?"}}</h4>
+                <div class="input-group">
+                  <input type="text" id="uploadingFileInput" class="form-control" placeholder=" '{{_ "Order"}} #852 ', '{{_ "Specs"}}'">
+                  <span class="input-group-btn">
+                    <button class="btn btn-success js-upload-file" type="button">   <i class="fa fa-cloud-upload"></i>   </button>
+                    <button class="btn btn-danger js-cancel-upload-file" type="button">   <i class="fa fa-times"></i>   </button>
+                  </span>
+                </div><!-- /input-group -->
+              {{else}}
+                <button class="btn btn-success js-goto-upload-file"><i class="fa fa-cloud-upload"></i> {{_ "Upload file"}}</button>
+              {{/if}}
+              <div class="text-center">
+                {{#each file in order.files}}
+                  <a href='{{file.url}}' target="_blank" class='btn btn-default'><i class="fa fa-file-text"></i> {{file.name}}</a>
+                {{/each}}
+              </div>
+            {{/panel}}
+            <!-- ...........................DETAILS...........         -->
+            {{#panel title=(_ "Details") built=true}}
+              <ul class='list-group'>
+                {{#if addingOrderDetail}}
+                  {{#if sellingItemName}}
+                    <li class='list-group-item'>
+                      {{> TooDetailEdit createDetailArgs }}
+                    </li>
+                  {{else}}
+                    <li class='list-group-item'>
+                      {{> Item_DECS productArgs}}
+                      <div class='wrapper'>
+                        <button class=" btn btn-danger js-cancel-add-order-detail">
+                          {{_ "Cancel"}}
+                        </button>
+                      </div>
+                    </li>
+                  {{/if}}
+                {{else}}
+                  <div class='wrapper'>
+                    <button class="btn btn-success js-add-order-detail">{{_ "Add item"}}</button>
+                  </div>
+                {{/if}}
+                {{#each detail in order.soldProducts}}
+                  {{> TooDetailShow (showDetailArgs detail) }}
+                    {{else}}
+                {{/each}}
+              </ul>
+              <div class='row'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                  <h1 class=''>
+                    {{amountTotal order.soldProducts}} un
+                  </h1>
+                  <h1 class=''>
+                    {{grandTotal order.soldProducts}}
+                  </h1>
+                </div>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span>{{_ "Subtotal"}}</span>
+                        </td>
+                        <td>{{subtotal order.soldProducts}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span>{{_ "Discount"}}</span>
+                        </td>
+                        <td>{{discount order.soldProducts}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span>{{_ "Net total"}}</span>
+                        </td>
+                        <td>
+                          {{netTotal order.soldProducts}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span>{{_ "Taxes"}}</span>
+                        </td>
+                        <td>{{taxes order.soldProducts}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <hr>
+                            {{_ "Grand total"}}
+                            {{grandTotal order.soldProducts}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {{/panel}}
+          </div>
+          <div class="col col-xs-12 col-md-6 col-lg-4">
+            <!-- ...........................DELIVERIES...........         -->
+            {{> Deliveries_panel (deliveryArgs order)}}
+          </div>
+          <div class='col col-xs-12 col-md-6 col-lg-4'>
+            <!-- ...........................INVOICES...........         -->
+            {{> Invoices_panel (invoiceArgs order)}}
+          </div>
+        </div>
+        {{else}}
+          {{#panel title=(_ "Customer") built=true}}
+            {{#if company}}
+              <h3>{{companyName}}</h3>
+                {{#if showCompanyDetails}}
+                  <h1>{{company}}</h1>
+                  <button class='btn btn-default js-hide-company-details'>{{_ 'Hide details'}}</button>
+                  {{#panel title=(_ "Customer details")}}
+                    {{> Company_DECS (customerArgs company)}}
+                  {{/panel}}
+                {{else}}
+                  <div class=''>
+                    <button class='btn btn-default js-show-company-details'>{{_ 'View details'}}</button>
+                  </div>
+                {{/if}}
+              <div class=''>
+                <button class='btn btn-primary js-show-company-switch'>{{_ 'Switch'}}</button>
+              </div>
+            {{else}}
+              {{> Company_DECS customerArgs }}
+            {{/if}}
+            <div class='pull-right'>
+              <button class='btn btn-success js-set-company'>{{_ "Save"}}</button>
+            </div>
+          {{/panel}}
+        {{/if}}
+      </div>
+    {{/staggering}}
+  {{else}}
+        {{_ "Loading"}}
+  {{/if}}
+</template>

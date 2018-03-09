@@ -1,0 +1,28 @@
+<template name="Hospitals_panel">
+  {{#panel title='Hospitals' color='hred'}}
+    <h3>Hospitals</h3>
+    {{#if isthereahospitalselected}}
+      mostrar data del hospital {{hospital.name}}
+      {{hospital.pph}}
+      {{hospital.tax}}
+    {{else}}
+      {{#each chori in hospitals}}
+        <button class='btn btn-default js-name' id='{{chori._id}}'>{{chori.name}}</button>
+      {{/each}}
+    {{/if}}
+    <div style="overflow:hidden;">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="datetimepicker"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--
+    {{chori.pph}}
+    {{chori.tax}}
+    SUMA  BITCH >>>>> {{sum (sum chori.pph chori.tax 1)}} -->
+  {{/panel}}
+</template>

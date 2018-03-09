@@ -1,0 +1,94 @@
+<template name="Company_DECS">
+  {{#if selectedCompany}}
+    <!-- <hr> -->
+    {{#if editingCompany}}
+      {{> Company_edit (editCompanyArgs selectedCompany)}}
+    {{else}}
+      {{> Company_show (showCompanyArgs selectedCompany)}}
+    {{/if}}
+    <!-- <hr> -->
+    <div class="list-item">
+      {{#if mode 'customer'}}
+        {{#if rel selectedCompany}}
+          {{#if editingCustomerRel}}
+            <h1>1</h1>
+            {{> Rel_customer_edit (editRelArgs selectedCompany)}}
+          {{else}}
+            <!-- <h2>2</h2> -->
+            {{> Rel_customer_show (showRelArgs selectedCompany)}}
+          {{/if}}
+        {{else}}
+          <h1>3</h1>
+          <!-- no existing rel, create one! -->
+          {{> Rel_customer_edit (editRelArgs selectedCompany)}}
+        {{/if}}
+      {{else}}
+        <h1>4</h1>
+      {{/if}}
+    </div>
+    <!-- <hr> -->
+    {{#panel title='Lugares' collapsed=true built=true}}
+        <div class="list-item">
+            {{#if creatingPlace}}
+                {{> Place_edit (editPlaceArgs selectedCompany '' '' '' )}}
+            {{else}}
+                <div class="text-center">
+                    <button class="js-place-create btn btn-default">
+                        <i class='fa fa-map-marker'></i>
+                        {{_ "New place"}}
+                    </button>
+                </div>
+            {{/if}}
+            <hr>
+        </div>
+        <div class="list-item">
+            {{#each placeRels selectedCompany}}
+                <hr>
+                {{#if editingPlace  _id}}
+                    {{> Place_edit (editPlaceArgs destiny origin _id)}}
+                {{else}}
+                    {{> Place_show (showPlaceArgs origin _id )}}
+                {{/if}}
+            {{/each}}
+        </div>
+    {{/panel}}
+    <!-- <hr> -->
+    {{#panel title='Contactos' collapsed=true}}
+        <div class="list-item">
+            {{#if creatingContact}}
+                {{> Contact_edit (editContactArgs selectedCompany  )}}
+            {{else}}
+                <div class="text-center">
+                    <button class="js-contact-create btn btn-default">
+                        <i class='fa fa-user'></i>
+                        {{_ "New contact"}}
+                    </button>
+                </div>
+            {{/if}}
+            <hr>
+        </div>
+        <div class="list-item">
+            {{#each contactRels selectedCompany}}
+
+                <hr>
+                {{#if editingContact _id}}
+                    {{> Contact_edit (editContactArgs destiny origin _id)}}
+                {{else}}
+                    {{> Contact_show (showContactArgs origin _id )}}
+                {{/if}}
+            {{/each}}
+        </div>
+    {{/panel}}
+
+  {{else}}
+    <!-- NO SELECTION -->
+    {{#if creatingCompany}}
+    <h1>5</h1>
+      {{> Company_create createCompanyArgs }}
+    {{else}}
+      <h3>{{_ "Select company"}}</h3>
+      {{> Company_search searchCompanyArgs }}
+    {{/if}}
+  {{/if}}
+  <!-- //selectedCompany -->
+</template>

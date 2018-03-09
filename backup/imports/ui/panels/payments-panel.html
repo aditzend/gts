@@ -1,0 +1,92 @@
+<template name="Payments_panel">
+  {{#panel title=(_ "Incoming money") color='hgreen'}}
+    <!-- {{#if showAllPending}} -->
+      <!-- <button class='btn btn-default js-hide-all-pending'>{{_ "Hide all pending"}}</button> -->
+      {{#each i in allPending}}
+           <button class='btn btn-default js-cai' id={{i._id}}>
+             <h5>{{nameGetter i.destiny}}</h5>
+             <small id={{i._id}}>
+               {{_ "Amount due"}}: ${{formatAsNumber i.rem}} {{timeForPayment i.dueDate}}
+             </small>
+           </button>
+      {{else}}
+        {{_ "No pending payments"}}
+      {{/each}}
+    <!-- {{else}} -->
+      <!-- <button class='btn btn-default js-show-all-pending'>{{_ "Show all pending"}}</button> -->
+    <!-- {{/if}} -->
+    {{#if selectedCompany}}
+      <h1>{{companyName}} {{_ "ows us"}} {{CurrentAccountStatus}}, {{qtyCaisOpen}} {{_ "pending invoices"}}.</h1>
+      <h3>Ingresando pago de {{companyName}}</h3>
+      <form class='form js-receive-payment'>
+        <div class='form-group'>
+          <label for='type'>{{_ "Paying with"}} </label>
+          <input type="text" name="type" >
+        </div>
+        <div class='form-group'>
+          <label for='amount'>{{_ "Amount"}} </label>
+          <input type="number" name="amount" >
+        </div>
+        <button type='submit' class='btn btn-success'>{{_ "Receive payment from"}} {{companyName}}</button>
+      </form>
+      <hr>
+      {{#each i in unassignedPayments}}
+           <button class='btn btn-info animated flipInX m-t-xs' id={{i._id}}>
+             <small id={{i._id}}>
+               {{i.type}} ${{formatAsNumber i.amount}}
+             </small>
+           </button>
+      {{else}}
+        {{_ "No assigned payments"}}
+      {{/each}}
+      {{#if showAutoAssign}}
+      <button class='btn btn-warning js-auto-assign'>{{_ "Auto Assign"}}</button>
+      {{/if}}
+      <hr>
+      {{#if caiSelected}}
+      <button class='btn btn-default js-back-to-search' id={{item._id}}>
+        {{_ 'Back to search'}}
+      </button>
+        <h5>{{_ "Grand total"}} : {{cai.grandTotal}}</h5>
+        <h5>{{_ "Sum of payments"}} : {{sumOfPayments}}</h5>
+        <h5>{{_ "Amount due"}}: {{diff cai.grandTotal sumOfPayments }}</h5>
+        <small >
+          <i id={{cai._id}} class='fa fa-clock-o'></i>
+          {{timeFromCreation item.createdAt}}
+        </small>
+        {{#each h in cai.history}}
+          {{h.type}} {{h.amount}}
+        {{/each}}
+        <form class='form'>
+          <div class='form-group'>
+            <label for='type'>{{_ "Details"}} </label>
+            <input type="text" name="type" >
+          </div>
+          <div class='form-group'>
+            <label for='amount'>{{_ "Amount"}} </label>
+            <input type="number" name="amount" >
+          </div>
+          <button type='submit' class='btn btn-success'>Asentar pago</button>
+        </form>
+        {{else}}
+          {{#each item in cais}}
+            <button class='btn btn-default js-cai animated flipInX m-t-xs' id={{item._id}}>
+              GT {{item.grandTotal}}
+              REM: {{item.rem}}
+              <small id={{item._id}}>
+                <i id={{item._id}} class='fa fa-clock-o'></i>
+                {{timeFromCreation item.createdAt}}
+              </small>
+            </button>
+            {{else}}
+              {{_ "This customer has no pending items"}}
+              <button class='btn btn-default js-back-to-search' id={{item._id}}>
+                {{_ 'Back to search'}}
+              </button>
+          {{/each}}
+      {{/if}}
+    {{else}}
+      {{> Company_DECS companyArgs}}
+    {{/if}}
+  {{/panel}}
+</template>

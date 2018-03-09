@@ -1,0 +1,14 @@
+<template name="Car_sell">
+    <div class="">
+        <div class="col-xs-12">
+            <h1>Que producto compro este cliente? </h1>
+             {{#each f in families}}
+                <button id="{{f._id}}" name= "{{f.name}}" class='btn btn-sm btn-primary js-sell' style="margin-top=3px;" type="button" >{{f.name}}</button>
+            {{/each}}
+        </div>
+    </div>
+
+   
+
+   
+</template>

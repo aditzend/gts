@@ -1,0 +1,37 @@
+<template name="DeliveryNote_show_page">
+  <div class='wrapper hidden-print'>
+    <button class='btn btn-success js-print-stickers '><i class='fa fa-print'></i></button>
+  </div>
+  <div class='printable-doc-wrapper'>
+    <div class='row'>
+      {{> dnHeaderLeft dnHeaderLeftArgs}}
+      {{> dnHeaderCenterHolder dnHeaderCenterHolderArgs}}
+      {{> dnHeaderRight dnHeaderRightArgs}}
+    </div>
+    <div class='row'>
+      {{> dnSubHeader1 dnSubHeader1Args}}
+    </div>
+    <!-- <div class='row'>
+      {{> dnSubHeader2 dnSubHeader2Args}}
+    </div> -->
+
+      <div class='row'>
+        {{> dnMainArea dnMainAreaArgs}}
+      </div>
+
+        <div class='row'>
+          {{> dnFooter1 dnFooter1Args}}
+        </div>
+
+          <div class='row'>
+            {{> dnFooter2 dnFooter2Args}}
+          </div>
+
+            <div class='row'>
+              {{> dnFooter3 dnFooter3Args}}
+            </div>
+
+
+
+  </div>
+</template>

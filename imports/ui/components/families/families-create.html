@@ -1,0 +1,41 @@
+<template name="Families_create">
+    {{#panel title="Nuevo producto"}}
+        <form data-action='form' class="form-horizontal">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="name" class="control-label">Nombre del producto</label>
+                    <input class="form-control" id="nameInput" name="name" type="text">
+                    <span class="form-control-feedback"></span>
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="exchange" class="control-label">Tasa de recambio</label>
+                    <input class="form-control" id="exchangeInput" name="exchange" type="number">
+                    <span class="form-control-feedback"></span>
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class='col-xs-12 col-lg-12'>
+                <div class="form-group">
+                    <label class="control-label" for="uom">Se mide en km o años?</label>
+                    <select data-action='uom' id='uomInput' class='form-control'>
+                        <option value="km" selected>km</option>
+                        <option value="year">años</option>
+                        <option value="month">meses</option>
+                    </select>
+                    <span class="form-control-feedback"></span>
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+                    <span class="js-cancel btn btn-default" type="submit">Cancelar</span>
+            
+                    <button class="js-create btn btn-success" type="submit">Crear</button>
+                </div>
+            </div>
+        </form>
+    {{/panel}}
+</template>

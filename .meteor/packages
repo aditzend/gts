@@ -1,0 +1,135 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.12_1                   # The database Meteor supports right now
+blaze-html-templates@1.0.4    # Compile .html files into Meteor Blaze views
+reactive-var@1.0.10            # Reactive variable for tracker
+jquery@1.11.9                  # Helpful client-side library
+tracker@1.1.0                 # Meteor's client-side reactive programming library
+
+standard-minifier-css@1.2.0_1   # CSS minifier run for production mode
+standard-minifier-js@1.2.0_1    # JS minifier run for production mode
+es5-shim@4.6.14_1                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.5.8_1              # Enable ECMAScript2015+ syntax in app code
+
+#autopublish@1.0.7             # Publish all data to the clients (for prototyping)
+insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
+
+
+chipcastle:countries
+
+underscore@1.0.9
+less@2.7.5_1
+aldeed:simple-schema
+
+
+# ui
+reactive-dict@1.1.8
+aldeed:template-extension
+
+  #HOMER
+kevohagan:sweetalert
+chrismbeckett:toastr
+fortawesome:fontawesome
+
+  #ANIMATION
+percolate:momentum
+
+
+
+# data
+
+dburles:collection-helpers
+#aldeed:collection2
+#aldeed:autoform
+matb33:collection-hooks
+
+session@1.1.6                 # Client-side reactive dictionary for your app
+
+
+
+
+
+
+
+
+#ACCOUNTS
+accounts-password@1.3.0
+useraccounts:bootstrap
+useraccounts:flow-routing
+softwarerero:accounts-t9n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#OTHERS
+themeteorchef:jquery-validation
+dispatch:phoneformat.js
+mquandalle:jade
+3stack:country-codes
+
+d3js:d3
+emdagon:c3js
+andrasph:clockpicker
+
+meteorhacks:ssr
+okgrow:router-autoscroll
+#mackbrowne:metismenu
+onokumus:metismenu
+#matb33:bootstrap-dropdowns
+#lookback:dropdowns
+#lookback:tooltips
+
+#ROLES
+nicolaslopezj:roles
+arillo:flow-router-helpers
+#alanning:roles
+
+
+#ROUTING
+kadira:flow-router
+kadira:blaze-layout
+
+
+#SEARCH
+easy:search
+easysearch:elasticsearch
+
+#STYLING
+twbs:bootstrap
+natestrauser:animate-css
+joshdellay:meteor-ladda-bootstrap
+tsega:bootstrap3-datetimepicker
+
+#TIMING
+momentjs:moment
+rzymek:moment-locale-es
+natestrauser:x-editable-bootstrap
+random@1.0.10
+mdg:validated-method
+#jeremy:geocomplete
+#dburles:google-maps
+email@1.1.17_1
+peerlibrary:reactive-publish
+tap:i18n
+
+shell-server@0.2.1
+matb33:bootstrap-print

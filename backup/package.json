@@ -1,0 +1,15 @@
+{
+  "name": "s2",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/bootstrap-datetimepicker.git",
+    "highcharts": "^4.2.7",
+    "meteor-node-stubs": "~0.2.0",
+    "numeral": "^1.5.3",
+    "telegram-bot-api": "^1.2.0"
+  }
+}
