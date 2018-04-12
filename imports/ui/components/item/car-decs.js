@@ -7,8 +7,9 @@ import './car-edit.js';
 
 Template.Car_DECS.onCreated(function() {
     this.autorun(() => {
-      const w = workfor('item motor decs.js');
-        this.subscribe('items.own', w._id);
+    //   const w = workfor('item motor decs.js');
+        // this.subscribe('items.own', w._id);
+        this.subscribe('cars.all');
     });
 
     this.state = new ReactiveDict();
@@ -173,9 +174,9 @@ Template.Car_DECS.helpers({
             }
         }
     },
-    createItemArgs() {
+    createCarArgs() {
         const instance = Template.instance();
-console.log("item name", instance.state.get('creatingItem'));
+        console.log("item name", instance.state.get('creatingItem'));
 
         return {
             item: {
@@ -194,18 +195,11 @@ console.log("item name", instance.state.get('creatingItem'));
         }
     },
 
-    editItemArgs(itemId, personId, relId) {
+    editCarArgs(carId) {
         const instance = Template.instance();
-        const item = Items.findOne(itemId);
-        const person = Persons.findOne(personId);
-        const rel = Rels.findOne(relId);
+        const car = Cars.findOne(carId);
         return {
-            destiny: itemId,
-            owner: HARDCODE_OWNER,
-            type: 'contact',
-            item: item,
-            person: person,
-            rel: rel,
+            car: car,
             onSavedData() {
                 // console.log('rel created contact', relId);
                 instance.state.set('editingItem', false);
@@ -220,76 +214,6 @@ console.log("item name", instance.state.get('creatingItem'));
             }
         }
     },
-    editPlaceArgs(itemId, placeId, relId) {
-        const instance = Template.instance();
-        const item = Items.findOne(itemId);
-        const place = Places.findOne(placeId);
-        const rel = Rels.findOne(relId);
-        return {
-            destiny: itemId,
-            owner: HARDCODE_OWNER,
-            type: 'place',
-            item: item,
-            place: place,
-            rel: rel,
-            onSavedData() {
-                // console.log('rel created contact', relId);
-                instance.state.set('editingPlace', false);
-                instance.state.set('creatingPlace', false);
-
-            },
-            onCancel() {
-                // console.log('cancel');
-                instance.state.set('editingPlace', false);
-                instance.state.set('creatingPlace', false);
-
-            }
-        }
-    },
-
-
-    showPlaceArgs(placeId, relId) {
-        const instance = Template.instance();
-        const place = Places.findOne(placeId);
-        const rel = Rels.findOne(relId);
-        return {
-            place: place,
-            rel: rel,
-            onEdit(relId) {
-                instance.state.set('editingPlace', relId);
-                // console.log('EDIT CONTACT REL ', relId);
-            },
-            onDelete(relId) {
-                instance.state.set('deletingPlace', relId);
-                // console.log('DELETE CONTACT REL ', relId);
-                swal({
-                        title: "Estas seguro?",
-                        text: "No se puede recuperar esta informacion!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Si, borrarlo!",
-                        cancelButtonText: "No, cancelar por favor!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-                    function(isConfirm) {
-                        if (isConfirm) {
-
-                            const deleted = Rels.remove(relId);
-                            console.log('deleted', deleted);
-
-
-                            swal("Eliminado!", "Este lugar fue eliminado.", "success");
-                        } else {
-                            swal("Cancelado", "Este lugar esta seguro :)", "error");
-                        }
-                    });
-
-            }
-        }
-    },
-
 
 });
 //vvvvvvvvvvvvvv STATE vvvvvvvvvvvvvv
@@ -328,10 +252,10 @@ Template.Car_DECS.helpers({
         const instance = Template.instance();
         return instance.state.get('editingPlace');
     },
-    editingItem(relId) {
-        const instance = Template.instance();
-        return (relId == instance.state.get('editingItem')) ? true : false;
-    }
+    // editingItem(relId) {
+    //     const instance = Template.instance();
+    //     return (relId == instance.state.get('editingItem')) ? true : false;
+    // }
 });
 //vvvvvvvvvvvvvv HELPERS vvvvvvvvvvvvvv
 Template.Car_DECS.helpers({
@@ -414,5 +338,6 @@ Template.Car_DECS.events({
     'click .js-edit': function(e, instance) {
         console.log("edit ", e.target.id);
         instance.state.set('editingItem', true);
+        console.log("editingItem", instance.state);
     }
 });

@@ -18,6 +18,7 @@ import '../../api/payment-methods/payment-methods.js';
 import '../../api/orders/details/details.js';
 import '../../api/rels/rels.js';
 import '../../api/items/items.js';
+import '../../api/cars/cars.js';
 import '../../api/persons/persons.js';
 import '../../api/payments/payments.js';
 import '../../api/places/places.js';

@@ -39,10 +39,10 @@ Template.Car_edit.onCreated(function() {
 
 Template.Car_edit.onRendered(function() {
     const instance = Template.instance();
-    const item = instance.data.item;
-    console.log('on rendered EDIT ITEM >>>>>>', item);
-    instance.$('#nameInput')
-        .val(item.name);
+    const car = instance.data.car;
+    console.log('on rendered EDIT ITEM >>>>>>', car);
+    instance.$('#plate')
+        .val(car.plate);
 
     // instance.$('#profitCenterSelect')
     //     .val('ffHRBxE9GjRY2TSzH');
@@ -67,7 +67,7 @@ Template.Car_edit.onRendered(function() {
                 this.defaultShowErrors();
             },
             submitHandler: function() {
-                    const w = workfor('item-motor-edit.js');
+                    // const w = workfor('item-motor-edit.js');
                     let plate = instance.$('#plate').val();
                     let brand = instance.$('#brand').val();
                     let model = instance.$('#model').val();
@@ -81,10 +81,9 @@ Template.Car_edit.onRendered(function() {
                     let birthdate = instance.$('#car-owner-birthdate').val();
 
 
-                    if (item._id == undefined) {
+                    if (car._id == undefined) {
                         console.log("INSERTING...");
-                        const newItem = Items.insert({
-                            type:"car",
+                        const newItem = Cars.insert({
                             plate: plate,
                             brand: brand,
                             model: model,
@@ -98,7 +97,7 @@ Template.Car_edit.onRendered(function() {
                               email: email,
                               phone: phone
                             },
-                            owner: w._id
+                            owner: 'GT'
                         });
                         instance.data.onSavedData(newItem);
                         swal({
@@ -107,8 +106,8 @@ Template.Car_edit.onRendered(function() {
                         });
                     } else {
                         console.log("UPDATING...");
-                        Items.update({
-                            _id: item._id
+                        Cars.update({
+                            _id: car._id
                         }, {
                             $set: {
                                 plate:plate,
@@ -116,13 +115,22 @@ Template.Car_edit.onRendered(function() {
                                 model: model,
                                 year: year,
                                 km: km,
+                                carOwner: {
+                                    givenName: givenName,
+                                    lastName: lastName,
+                                    gender: gender,
+                                    birthdate: birthdate,
+                                    email: email,
+                                    phone: phone
+                                },
+                                owner: 'GT'
                             }
                         });
-                        instance.data.onSavedData(item._id);
-                        // swal({
-                        //     title: name + ' actualizado!',
-                        //     type: "success"
-                        // });
+                        instance.data.onSavedData(car._id);
+                        swal({
+                            title: plate + ' actualizado!',
+                            type: "success"
+                        });
                     }
                     //insert or edit if
                 }
@@ -132,8 +140,8 @@ Template.Car_edit.onRendered(function() {
 
 Template.Car_edit.helpers({
 
-    selectedItem() {
-        return Template.instance().data.item.name;
+    car() {
+        return Template.instance().data.car;
     }
 })
 

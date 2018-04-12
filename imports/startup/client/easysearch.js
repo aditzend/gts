@@ -174,8 +174,8 @@ CarsIndex = new EasySearch.Index({
             return selector;
         }
     }),
-    collection: Items,
-    fields: ['plate', 'description'],
+    collection: Cars,
+    fields: ['plate', 'brand', 'model', 'carOwner.lastName'],
     defaultSearchOptions: {
         limit: 9
     },

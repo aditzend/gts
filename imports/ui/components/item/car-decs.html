@@ -13,12 +13,13 @@
     <hr>
         {{#if editingItem}}
         <h1>editando</h1>
-          {{> Item_motor_edit (editItemArgs selectedItem)}}
+          {{> Car_edit (editCarArgs selectedItem)}}
+
         {{else}}
           <button class="btn btn-danger js-delete" id={{selectedItem}}>eliminar</button>
           <button class="btn btn-warning js-edit" id={{selectedItem}}>editar</button>
           <!-- {{> Item_show showthis}} -->
-          {{> Item_motor_show (showArgs selectedItem)}}
+          {{> Car_show (showArgs selectedItem)}}
           <!-- {{> Item_motor_show (showItemArgs selectedItem)}} -->
           <!-- <a href="{{pathFor 'printLabels' paramsLabel}}">print labels</a> -->
         {{/if}}
@@ -32,11 +33,13 @@
 
     {{else}} <!-- //selectedItem -->
       {{#if creatingItem}}
-        {{> Item_motor_edit createItemArgs }}
+        <h1>creando</h1>
+      
+        {{> Car_edit createCarArgs }}
 
       {{else}}
           <h3>Ingresá la patente</h3>
-          {{> Item_search searchItemArgs }}
+          {{> Car_search searchItemArgs }}
 
 
       {{/if}}

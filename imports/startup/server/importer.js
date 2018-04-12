@@ -17,11 +17,11 @@ function parseRows(obj) {
 };
 
 function importSql() {
-    console.log('importing sql from user ', Meteor.user()._id);
+    console.log('importSql ');
     conn()
     .then(connection => {
         const conn = connection;
-        startCreation({ conn: conn, offset: 0, owner: Meteor.user()._id }).then(obj => {
+        startCreation({ conn: conn, offset: 360, owner: 'GT' }).then(obj => {
             console.log("startCreation finished", obj);
         });
     });
@@ -31,7 +31,7 @@ function startCreation(connObj) {
     sqlQuery(connObj)
     .then(parseRows)
     .then(d => {
-        if (connObj.offset<527) {
+        if (connObj.offset<360) {
             setTimeout(function() {
                 const offset = connObj.offset +1;
                 const owner = connObj.owner;

@@ -11,11 +11,11 @@ const sqlQuery = function (connObj) {
         usuarios.modelo,\
         usuarios.kmtsyears,\
         usuarios.fecha_nac,\
-            usuarios.sexo,\
-            usuarios.matricula,\
-            usr_pro.death_point,\
-            productos.name_pro,\
-            usr_pro.time_set\
+        usuarios.sexo,\
+        usuarios.matricula,\
+        usr_pro.death_point,\
+        productos.name_pro,\
+        usr_pro.time_set\
         from usuarios\
         inner join usr_pro\
         on usuarios.ID_usr = usr_pro.ID_usr\
