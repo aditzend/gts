@@ -9,6 +9,7 @@
     "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/bootstrap-datetimepicker.git",
     "highcharts": "^4.2.7",
     "meteor-node-stubs": "~0.2.0",
+    "mysql": "^2.15.0",
     "numeral": "^1.5.3",
     "telegram-bot-api": "^1.2.0"
   }

@@ -3,8 +3,8 @@
 
 
 import './register-api.js';
-import './connection.js';
-import './importer.js';
+// import './connection.js';
+// import './importer.js';
 
 // EmailGenerator = {};
 // 
@@ -27,9 +27,9 @@ import './importer.js';
 
 
 Meteor.startup(function() {
-    Meteor.call("importSql");
-    process.env.MAIL_URL = Meteor.settings.smtp;
-    process.env.ixDbPass = Meteor.settings.ixDbPass;
+    // Meteor.call("importSql");
+    // process.env.MAIL_URL = Meteor.settings.smtp;
+    // process.env.ixDbPass = Meteor.settings.ixDbPass;
     // const sauserid = Meteor.settings.serabey_sauserid;
     // console.log("sauserid", sauserid);
 
