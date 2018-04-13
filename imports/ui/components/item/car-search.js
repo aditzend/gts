@@ -17,10 +17,7 @@ Template.Car_search.helpers({
             'style': "text-transform:uppercase"
         };
     },
-    car_searchIndex: function() {
-        // const instance = Template.instance();
-        return CustomersIndex;
-    },
+    carsIndex: () => Template.instance().data.index,
     insertedText: function() {
         const instance = Template.instance();
         const index = instance.data.index;
@@ -38,10 +35,7 @@ Template.Car_search.events({
     },
     'click .js-create-item': function(e, instance) {
         const index = instance.data.index;
-        console.log(index);
         let dict = index.getComponentDict();
-        console.log(dict);
-        debugger
         let insertedText = dict.get('searchDefinition')
             .toUpperCase();
             instance.data.itemNotFound(insertedText);

@@ -1,9 +1,9 @@
 <template name="Car_search">
-  {{> EasySearch.Input index=car_searchIndex attributes=car_searchIndexAttributes noDocumentsOnEmpty='true' }}
-  {{#EasySearch.Each index=car_searchIndex }}
+  {{> EasySearch.Input index=carsIndex attributes=car_searchIndexAttributes noDocumentsOnEmpty='true' }}
+  {{#EasySearch.Each index=carsIndex }}
     <button class='js-search-result-item btn btn-default' id={{_id}}>{{plate}}</button>
   {{/EasySearch.Each}}
-  {{#EasySearch.IfNoResults index=car_searchIndex}}
+  {{#EasySearch.IfNoResults index=carsIndex}}
   Ese auto no está ingresado.
   <hr>
   <button class='js-create-item btn btn-success'>Ingresar {{insertedText}} al GT System</button>

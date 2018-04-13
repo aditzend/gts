@@ -31,25 +31,7 @@ HeaderIndex = new EasySearch.Index({
     }
 });
 CustomersIndex = new EasySearch.Index({
-    engine: new EasySearch.Minimongo({
-        sort: function() {
-            return {
-                createdAt: -1
-            };
-        },
-        selector: function(searchObject, options, aggregation) {
-            let selector = this.defaultConfiguration()
-                .selector(
-                    searchObject, options, aggregation),
-                categoryFilter = options.search.props.categoryFilter;
-
-            if (_.isString(categoryFilter) && !_.isEmpty(categoryFilter)) {
-                selector.category = categoryFilter;
-            }
-
-            return selector;
-        }
-    }),
+    engine: new EasySearch.Minimongo(),
     collection: Cars,
     fields: ['plate'],
     defaultSearchOptions: {
@@ -61,6 +43,38 @@ CustomersIndex = new EasySearch.Index({
         return true;
     }
 });
+
+// CustomersIndex = new EasySearch.Index({
+//     engine: new EasySearch.Minimongo({
+//         sort: function() {
+//             return {
+//                 createdAt: -1
+//             };
+//         },
+//         selector: function(searchObject, options, aggregation) {
+//             let selector = this.defaultConfiguration()
+//                 .selector(
+//                     searchObject, options, aggregation),
+//                 categoryFilter = options.search.props.categoryFilter;
+
+//             if (_.isString(categoryFilter) && !_.isEmpty(categoryFilter)) {
+//                 selector.category = categoryFilter;
+//             }
+
+//             return selector;
+//         }
+//     }),
+//     collection: Cars,
+//     fields: ['plate'],
+//     defaultSearchOptions: {
+//         limit: 9
+//     },
+//     permission: () => {
+//         //console.log(Meteor.userId());
+
+//         return true;
+//     }
+// });
 CompaniesIndex = new EasySearch.Index({
     engine: new EasySearch.Minimongo({
         sort: function() {
@@ -155,36 +169,41 @@ ItemsIndex = new EasySearch.Index({
     }
 });
 CarsIndex = new EasySearch.Index({
-    engine: new EasySearch.Minimongo({
-        sort: function() {
-            return {
-                createdAt: -1
-            };
-        },
-        selector: function(searchObject, options, aggregation) {
-            let selector = this.defaultConfiguration()
-                .selector(
-                    searchObject, options, aggregation),
-                categoryFilter = options.search.props.categoryFilter;
-
-            if (_.isString(categoryFilter) && !_.isEmpty(categoryFilter)) {
-                selector.category = categoryFilter;
-            }
-
-            return selector;
-        }
-    }),
+    engine: new EasySearch.Minimongo(),
     collection: Cars,
-    fields: ['plate', 'brand', 'model', 'carOwner.lastName'],
-    defaultSearchOptions: {
-        limit: 9
-    },
-    permission: () => {
-        //console.log(Meteor.userId());
-
-        return true;
-    }
+    fields: ['plate', 'brand', 'model', 'carOwner.lastName']
 });
+// CarsIndex = new EasySearch.Index({
+//     engine: new EasySearch.Minimongo({
+//         sort: function() {
+//             return {
+//                 createdAt: -1
+//             };
+//         },
+//         selector: function(searchObject, options, aggregation) {
+//             let selector = this.defaultConfiguration()
+//                 .selector(
+//                     searchObject, options, aggregation),
+//                 categoryFilter = options.search.props.categoryFilter;
+
+//             if (_.isString(categoryFilter) && !_.isEmpty(categoryFilter)) {
+//                 selector.category = categoryFilter;
+//             }
+
+//             return selector;
+//         }
+//     }),
+//     collection: Cars,
+//     fields: ['plate', 'brand', 'model', 'carOwner.lastName'],
+//     defaultSearchOptions: {
+//         limit: 9
+//     },
+//     permission: () => {
+//         //console.log(Meteor.userId());
+
+//         return true;
+//     }
+// });
 ProductsIndex = new EasySearch.Index({
     engine: new EasySearch.Minimongo({
         sort: function() {
