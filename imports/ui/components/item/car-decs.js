@@ -33,14 +33,7 @@ Template.Car_DECS.helpers({
   //   const path = FlowRouter.path(routeName, params, queryParams);
   //   return path;
   // },
-  paramsLabel() {
-    const instance = Template.instance();
 
-    const motorId = instance.state.get('selectedItem');
-    return {
-      _id: motorId
-    }
-  },
   showArgs(id) {
       const car = Items.findOne({_id: id});
       return {
@@ -218,10 +211,7 @@ Template.Car_DECS.helpers({
 });
 //vvvvvvvvvvvvvv STATE vvvvvvvvvvvvvv
 Template.Car_DECS.helpers({
-    editingVendorRel() {
-        const instance = Template.instance();
-        return instance.state.get('editingVendorRel');
-    },
+  
     editingItem() {
         const instance = Template.instance();
         return instance.state.get('editingItem');
@@ -244,18 +234,8 @@ Template.Car_DECS.helpers({
         const instance = Template.instance();
         return instance.state.get('creatingItem');
     },
-    creatingPlace() {
-        const instance = Template.instance();
-        return instance.state.get('creatingPlace');
-    },
-    editingPlace() {
-        const instance = Template.instance();
-        return instance.state.get('editingPlace');
-    },
-    // editingItem(relId) {
-    //     const instance = Template.instance();
-    //     return (relId == instance.state.get('editingItem')) ? true : false;
-    // }
+ 
+ 
 });
 //vvvvvvvvvvvvvv HELPERS vvvvvvvvvvvvvv
 Template.Car_DECS.helpers({
@@ -325,7 +305,7 @@ Template.Car_DECS.events({
             function (isConfirm) {
                 if (isConfirm) {
 
-                    const deleted = Items.remove(e.target.id);
+                    const deleted = Cars.remove(e.target.id);
                     console.log('deleted', deleted);
 
 

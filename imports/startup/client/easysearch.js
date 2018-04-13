@@ -50,8 +50,8 @@ CustomersIndex = new EasySearch.Index({
             return selector;
         }
     }),
-    collection: Companies,
-    fields: ['name', 'fin'],
+    collection: Cars,
+    fields: ['plate'],
     defaultSearchOptions: {
         limit: 9
     },

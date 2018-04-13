@@ -22,16 +22,17 @@ Template.Company_search.helpers({
     company_searchIndex: function() {
         const instance = Template.instance();
         const mode = instance.data.mode;
-        switch (mode) {
-            case 'customer':
-                return CustomersIndex;
-                break;
-            case 'vendor':
-                return VendorsIndex;
-                break;
-            default:
-                return CompaniesIndex;
-        }
+        // switch (mode) {
+        //     case 'customer':
+        //         return CustomersIndex;
+        //         break;
+        //     case 'vendor':
+        //         return VendorsIndex;
+        //         break;
+        //     default:
+        //         return CompaniesIndex;
+        // }
+        return CustomersIndex;
     },
     insertedText: function() {
         const instance = Template.instance();
@@ -46,7 +47,6 @@ Template.Company_search.events({
     'click .js-search-result-item': function(e, instance) {
         //console.log("id elegido ", );
         instance.data.onCS_selectedCompany(e.target.id);
-
     },
     'click .js-create-company': function(e, instance) {
         const index = instance.data.index;
