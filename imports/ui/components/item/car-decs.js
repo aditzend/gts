@@ -55,7 +55,7 @@ Template.Car_DECS.helpers({
         return {
             //mode: 'product',
             mode: instance.data.mode,
-            index: ProductsIndex,
+            index: CarsIndex,
             selectedItem(id) {
                 instance.state.set('selectedItem', id);
                 console.log("STATE>>>>>>>>>>>>>> SELECTED Item ", id);
@@ -172,10 +172,9 @@ Template.Car_DECS.helpers({
         console.log("item name", instance.state.get('creatingItem'));
 
         return {
-            item: {
-                name: instance.state.get('creatingItem')
+            car: {
+                plate: instance.state.get('creatingItem')
             },
-            // person,
             onSavedData(newItem) {
                 instance.state.set('creatingItem', false);
                 instance.state.set('selectedItem', newItem);

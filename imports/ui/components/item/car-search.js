@@ -19,7 +19,7 @@ Template.Car_search.helpers({
     },
     car_searchIndex: function() {
         // const instance = Template.instance();
-        return CustomersIndex;
+        return CarsIndex;
     },
     insertedText: function() {
         const instance = Template.instance();
@@ -41,7 +41,6 @@ Template.Car_search.events({
         console.log(index);
         let dict = index.getComponentDict();
         console.log(dict);
-        debugger
         let insertedText = dict.get('searchDefinition')
             .toUpperCase();
             instance.data.itemNotFound(insertedText);
