@@ -37,6 +37,7 @@ Template.Car_DECS.helpers({
   showArgs(id) {
       const car = Items.findOne({_id: id});
       return {
+          ttt: 'test ok',
           carId: id,
           plate: car.plate,
           brand: car.brand,
@@ -72,19 +73,19 @@ Template.Car_DECS.helpers({
     //         foo: 'bar'
     //     }
     // },
-    showItemArgs(selectedItemId) {
+    showCarArgs(selectedItemId) {
         const instance = Template.instance();
-        const item = Items.findOne(selectedItemId);
-        instance.data.selectedItemName(item.name);
-        instance.data.selectedItemDesc(item.desc);
+        const car = Cars.findOne(selectedItemId);
+        instance.data.selectedItemName(car.plate);
+        // instance.data.selectedItemDesc(item.desc);
 
-        instance.data.selectedItemProfitCenter(item.profitCenter);
+        // instance.data.selectedItemProfitCenter(item.profitCenter);
 
         instance.data.selectedItemId(selectedItemId);
 
         return {
             foo: "bar",
-            item: item,
+            car: car,
 
             onEdit(itemId) {
                 instance.state.set('editingItem', itemId);
@@ -94,7 +95,7 @@ Template.Car_DECS.helpers({
                 instance.state.set('deletingItem', itemId);
                 // console.log('DELETE CONTACT REL ', relId);
                 swal({
-                        title: "Borramos a " + item.name + ' ?',
+                        title: "Borramos a " + car.plate + ' ?',
                         text: "No se puede recuperar esta informacion!",
                         type: "warning",
                         showCancelButton: true,
@@ -106,11 +107,11 @@ Template.Car_DECS.helpers({
                     },
                     function(isConfirm) {
                         if (isConfirm) {
-                            const deleted = Items.remove(itemId);
+                            const deleted = Cars.remove(itemId);
                             instance.state.set('selectedItem', false);
-                            swal(item.name + " fue eliminada.", "Se borraron los datos", "success");
+                            swal(car.plate + " fue eliminado.", "Se borraron los datos", "success");
                         } else {
-                            swal("Eliminación cancelada!", item.name + " esta segura :)", "error");
+                            swal("Eliminación cancelada!", car.plate + " esta segura :)", "error");
                         }
                     });
 

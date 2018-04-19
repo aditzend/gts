@@ -52,8 +52,8 @@ Template.Car_show.helpers({
         }
     },
 
-    showData() {
-        return Template.instance().data;
+    car() {
+        return Template.instance().data.car;
     },
     daylyKm() {
         const data = Template.instance().data;
