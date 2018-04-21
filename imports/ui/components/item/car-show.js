@@ -29,7 +29,7 @@ function xng(exchange,uom,pdate,dkms) {
 }
 
 Template.Car_show.onCreated(function() {
-    console.log("this en ims ", this.data);
+    console.log("data en car show ", this.data);
     this.state = new ReactiveDict();
     this.state.setDefault({
         showingOptionButtons: false,

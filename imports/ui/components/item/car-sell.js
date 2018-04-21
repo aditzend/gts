@@ -16,18 +16,18 @@ Template.Car_sell.helpers({
 Template.Car_sell.events({
     'click .js-sell': function(e, instance) {
         console.log("vender ", e.target.id);
-        console.log("vender ", instance.data.carId);
+        console.log("vender ", instance.data);
         Meteor.call("cars.sell", {
             carId: instance.data.carId,
              familyId: e.target.id,
              familyName: e.target.name
             });
-        Meteor.call(
-            'sendEmail',
-            'Alice <pross888@gmail.com',
-            'me@exa.com',
-            'holaa',
-            'test'
-        );
+        // Meteor.call(
+        //     'sendEmail',
+        //     'Alice <pross888@gmail.com',
+        //     'me@exa.com',
+        //     'holaa',
+        //     'test'
+        // );
     }
 })
