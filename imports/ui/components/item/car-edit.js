@@ -79,6 +79,7 @@ Template.Car_edit.onRendered(function() {
                     let email = instance.$('#car-owner-email').val();
                     let phone = instance.$('#car-owner-phone').val();
                     let birthdate = instance.$('#car-owner-birthdate').val();
+                    let origin = instance.$('#originSelect').val();
 
 
                     if (car._id == undefined) {
@@ -97,6 +98,7 @@ Template.Car_edit.onRendered(function() {
                               email: email,
                               phone: phone
                             },
+                            origin: origin,
                             owner: 'GT'
                         });
                         instance.data.onSavedData(newItem);
@@ -123,6 +125,7 @@ Template.Car_edit.onRendered(function() {
                                     email: email,
                                     phone: phone
                                 },
+                                origin: origin,
                                 owner: 'GT'
                             }
                         });
