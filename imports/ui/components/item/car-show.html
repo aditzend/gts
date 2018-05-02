@@ -14,12 +14,12 @@
             <!-- <p class="text-small"> {{transDate carOwner.birthdate}}</p> -->
         </p>
         <p class="text-left"> 
-            <h2>Alertas</h2>
+            <!-- <h2>Alertas</h2> -->
             {{#each p in purchases}}
               <!-- {{p.familyName}} {{transDate p.deathPoint}} -->
               <!-- {{#if isActive (exchangeDate "Frenos" p.createdAt)}} -->
               <!-- {{#if isActive '2018-01-01'}} -->
-              <p>Vencimiento :  <strong>{{p.familyName}} </strong> {{fexchangeDate p.familyName p.createdAt}}</p>
+              <p><strong>{{p.familyName}} </strong> <span class="label label-default">{{p.familyOwner}} </span> {{fexchangeDate p.familyName p.createdAt}}</p>
               <!-- {{/if}} -->
               {{else}}
               <p class="text-muted">No hay alertas.</p>

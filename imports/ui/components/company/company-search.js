@@ -32,7 +32,7 @@ Template.Company_search.helpers({
         //     default:
         //         return CompaniesIndex;
         // }
-        return CustomersIndex;
+        return CompaniesIndex;
     },
     insertedText: function() {
         const instance = Template.instance();

@@ -3,11 +3,11 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 Families = new Mongo.Collection('families');
-console.log("families loaded");
 
 Families.before.insert(function(userId,doc) {
     doc.createdAt = moment().format();
     doc.author = Meteor.userId();
+    doc.owner = Meteor.user().name;
 });
 
 Meteor.methods({

@@ -1,10 +1,12 @@
 <template name="Car_sell">
+    <h1>Car sell</h1>
     <div class="">
         <div class="col-xs-12">
             <h1>Que producto compro este cliente? </h1>
              {{#each f in families}}
-                <button id="{{f._id}}" name= "{{f.name}}" class='btn btn-sm btn-primary js-sell' style="margin-top=3px;" type="button" >{{f.name}}</button>
+                <button id="{{f._id}}" name= "{{f.name}}" data-owner="{{f.owner}}" class='btn btn-sm btn-primary js-sell' style="margin-top=3px;" type="button" >{{f.name}} - {{f.owner}}</button>
             {{/each}}
+
         </div>
     </div>
 

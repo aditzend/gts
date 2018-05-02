@@ -82,7 +82,7 @@ CompaniesIndex = new EasySearch.Index({
         }
     }),
     collection: Companies,
-    fields: ['name', 'cuit'],
+    fields: ['name', 'fin'],
     defaultSearchOptions: {
         limit: 9
     },

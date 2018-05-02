@@ -13,7 +13,8 @@ Meteor.publish(null, function() {
                 'isSuperAdmin': 1,
                 'jobs': 1,
                 'isMale': 1,
-                'modules':1
+                'modules':1,
+                'company':1
                 
             }
         });
@@ -35,7 +36,8 @@ Meteor.publish('userData', function() {
                 'isSuperAdmin': 1,
                 'jobs': 1,
                 'isMale': 1,
-                'modules':1
+                'modules':1,
+                'company': 1
             }
         });
     } else {

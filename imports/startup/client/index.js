@@ -57,18 +57,54 @@ import '../../api/companies/methods.js';
 //     console.log(res);
 // });
 
+function waitUserData() {
+    if (Meteor.user()){
+        console.log('COMPANY READY', Meteor.user().company);
+        Session.set('company', Meteor.user().company);
+        Meteor.clearInterval(userInterval);
+        
+    } else {
+        console.log('RETRYING');
+    }
+}
+
+function kill(id) {
+    Meteor.setTimeout(()=> Meteor.clearInterval(id), 901);
+}
+
 
 function startAll() {
+    // let userInterval = Meteor.setInterval(() => {
+    //     if (!Session.get('company')) {
+    //         console.log('RETRYING');
+          
+
+    //     } else {
+
+    //         console.log('COMPANY READY', Meteor.user().company);
+    //         Session.set('company', Meteor.user().company);
+    //         Meteor.clearInterval(userInterval);
+    //     }
+       
+    // }
+    //     , 300);
+
+
+
+    // if (!Meteor.user()) {
+    //     Session.set('company', 'grupogt');
+    //     Meteor.setTimeout(() => console.log('waiting'), 500);
+    // } else {
+    //     Session.set('company', Meteor.user().company);
+        
+    //     console.log('USER DATA LOADED', Session.get('company'));
+    // }
     $('body')
         .addClass('fixed-sidebar');
     $('body').addClass('fixed-navbar');
     $('body')
         .addClass('fixed-small-header');
     Session.set('job', 0);
-    console.log("setting session job 0");
-    console.log('METEOR USER', Meteor.user());
-    console.log('METEOR USER ID', Meteor.userId());
-
     TAPi18n.setLanguage('es')
         .done(function () { })
         .fail(function (error_message) {

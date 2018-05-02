@@ -43,7 +43,7 @@ Template.Customers_panel.helpers({
 
         return {
             mode: 'customer',
-            index: CustomersIndex,
+            index: CompaniesIndex,
             selectedCompany(id) {
                 instance.state.set('selectedCompany', id);
                 // console.log("STATE>>>>>>>>>>>>>> SELECTED COMPANY ", id);

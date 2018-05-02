@@ -4,7 +4,7 @@ import "./car-sell.js";
 
 //calcula los kms diarios
 function dkms(km,year) {
-    const age =
+    const age =2
         km /
         (
             (moment().year() - year) * 12 * 30

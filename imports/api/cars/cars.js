@@ -24,12 +24,11 @@ Meteor.methods({
             year: data.year,
             km: data.km,
             carOwner: data.carOwner,
-            createdAt: new Date(),
-            owner: Meteor.userId()
+            createdAt: new Date()
         });
     },
     'cars.sell'(data) {
-        check(data, Object);
+        check(data, Object); 
 
         if (!Meteor.userId()) {
             throw new Meteor.Error("no autorizado");
@@ -39,6 +38,7 @@ Meteor.methods({
                 purchases: {
                     familyId: data.familyId,
                     familyName: data.familyName,
+                    familyOwner: data.familyOwner,
                     createdAt: new Date()
                 }
             }

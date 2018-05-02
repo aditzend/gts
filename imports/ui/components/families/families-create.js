@@ -31,7 +31,6 @@ import "./families-create.html";
 
 Template.Families_create.onRendered(function() {
     const instance = Template.instance();
-
     instance.$('[data-action=form]').validate({
         rules: {
             name: {

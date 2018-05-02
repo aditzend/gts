@@ -7,7 +7,11 @@ Template.Families_panel.onCreated(function() {
         creating: false
     });
     this.autorun(() => {
-        this.subscribe("families.all");
+        this.subscribe("userData");
+        if (Meteor.user()) {
+            this.subscribe("families.own", Meteor.user().name);
+        }
+       
     });
 }
 );
