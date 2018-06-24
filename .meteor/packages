@@ -127,7 +127,7 @@ random@1.0.10
 mdg:validated-method
 #jeremy:geocomplete
 #dburles:google-maps
-email@1.1.17_1
+email
 peerlibrary:reactive-publish
 tap:i18n
 

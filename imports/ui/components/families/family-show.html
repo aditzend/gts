@@ -1,0 +1,24 @@
+<template name="Family_show">
+    <div class=" {{#if showingOptionButtons}}js-hide-option-buttons{{else}}js-show-option-buttons{{/if}}">
+        <div class='row'>
+            <div class='col-xs-12 col-md-12 col-lg-12'>
+                <p class='text-right'>
+                    <button class='btn btn-sm btn-default js-edit'>
+                        <i class='fa fa-pencil'> </i> Editar</button>
+                    <button id='{{family._id}}' class='btn btn-sm btn-default js-delete'>
+                        <i class='fa fa-trash'> </i> Eliminar</button>
+                </p>
+
+                <p>
+                    <h3 class="no-margins font-extra-bold text-primary ">{{family.name}}</h3>
+                </p>
+
+                <h3>{{family.exchange}}</h3>
+                <!-- <h3>PC: {{item.profitCenter}}</h3>      -->
+
+
+            </div>
+        </div>
+    </div>
+
+</template>

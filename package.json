@@ -8,6 +8,7 @@
     "bcrypt": "^0.8.7",
     "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/bootstrap-datetimepicker.git",
     "highcharts": "^4.2.7",
+    "mailgun-js": "^0.18.1",
     "meteor-node-stubs": "~0.2.0",
     "mysql": "^2.15.0",
     "numeral": "^1.5.6",

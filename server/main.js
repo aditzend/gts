@@ -1,22 +1,21 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-import { Email } from 'meteor/email';
+
 ///server
 import '/imports/startup/server';
 
 import {
     Accounts
 } from 'meteor/accounts-base';
-
-Meteor.methods({
-    // async getMeteorUser() {
-    //     const result = await Meteor.user();
-    //     return result;
-    // }
-    sendEmail(to, from, subject, text) {
-        check([to, from, subject, text], [String]);
-        this.unblock();
-        console.log("sending email", process.env.MAIL_URL);
-        Email.send({  to, from, subject, text});
-    }
-});
+   
+if (Meteor.isServer) {
+    Meteor.startup(() => {
+        process.env.MAIL_URL = Meteor.settings.MAILGUN;
+        // Meteor.call("saveEmailJob", "ad@alexanderditzend.com","Tom", "Aceite y Filtro", "2018-06-22T07:00:00-03:00");
+        // Email.send({
+        //     to: "ad@alexanderditzend.com",
+        //     from: "sendfrom@gmail.com",
+        //     subject: "Example Email",
+        //     text: "The contents of our email in plain text.",
+        // });
+    });
+}

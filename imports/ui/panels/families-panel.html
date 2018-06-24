@@ -1,13 +1,15 @@
 <template name="Families_panel">
-    {{#panel title="Productos" panelClass="stats" color="hviolet"}}
+    {{#panel title="Productos" panelClass="stats" color="hviolet"}} 
+    {{#if selectedFamily}}
+    {{> Family_show (showFamilyArgs selectedFamily)}}
+    {{/if}}
  
     {{#each family in families}}
         <button 
-            class="btn btn-lg btn-success js-edit-family" 
+            class="btn btn-lg btn-success js-show-family" 
             id={{family._id}}
             style="margin:30px;"
-            >
-            
+            > 
             {{family.name}}
         </button>
     {{/each}}
