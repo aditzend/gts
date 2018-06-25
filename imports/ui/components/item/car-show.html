@@ -2,10 +2,8 @@
   <div class=" {{#if showingOptionButtons}}js-hide-option-buttons{{else}}js-show-option-buttons{{/if}}">
     <div class='row'>
       <div class='col-xs-12 col-md-12 col-lg-12'>
-
           {{#with car}}
         <p class='text-right'>
-          
           <h1 class="text-big"><strong>{{plate}}</strong></h1>
           <!-- <h2>{{brand}} {{model}} {{year}}</h2> -->
           <!-- <p class="text-muted">Hace {{daylyKm}} km/día</p>  -->
@@ -19,7 +17,16 @@
               <!-- {{p.familyName}} {{transDate p.deathPoint}} -->
               <!-- {{#if isActive (exchangeDate "Frenos" p.createdAt)}} -->
               <!-- {{#if isActive '2018-01-01'}} -->
-              <p><strong>{{p.familyName}} </strong> <span class="label label-default">{{p.familyOwner}} </span> {{fexchangeDate p.familyName p.createdAt}}</p>
+              <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{p.familyName}} </h3>
+                    <h6 class="card-subtitle mb-2 text-muted">{{p.familyOwner}}</h6>
+                    <p class="card-text">{{fexchangeDate p.familyName p.createdAt}}</p>
+                    <a id="{{p.index}}" class="card-link js-delete-purchase" style="font-size:15px;">Eliminar Esta Venta</a>
+                </div>
+              </div>
+              <hr>
+              
               <!-- {{/if}} -->
               {{else}}
               <p class="text-muted">No hay alertas.</p>

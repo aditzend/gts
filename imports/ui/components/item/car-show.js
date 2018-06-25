@@ -128,6 +128,8 @@ Template.Car_show.events({
     'click .js-edit': function(e, instance) {
         // instance.data.onEdit(instance.data.item._id);
 
+    },
+    'click .js-delete-purchase':function(evt,ins) {
+        console.log(`delete purchase ${evt.target.id}`);
     }
-
 });

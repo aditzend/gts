@@ -9,7 +9,6 @@
       </button>
     </div>
   </div>
-    <hr>
         {{#if editingItem}}
         <h1>editando</h1>
           {{> Car_edit (editCarArgs selectedItem)}}
@@ -22,14 +21,6 @@
           <!-- {{> Item_motor_show (showItemArgs selectedItem)}} -->
           <!-- <a href="{{pathFor 'printLabels' paramsLabel}}">print labels</a> -->
         {{/if}}
-      <hr>
-
-
-      <hr>
-
-
-
-
     {{else}} <!-- //selectedItem -->
       {{#if creatingItem}}
         <h1>creando</h1>

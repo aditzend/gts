@@ -1,4 +1,4 @@
-import { Email } from 'meteor/email';
+// import { Email } from 'meteor/email';
 import { Mailgun } from 'meteor/risul:mailgun';
 
 
@@ -40,13 +40,15 @@ Meteor.methods({
             Emails.update({_id:jobId}, {$set:{status: 'SENT'}});
         }));
     },
-    saveEmailJob(email,givenName,family,dueDate) {
-        Emails.insert({
-            email: email,
-            givenName: givenName,
-            family: family,
-            dueDate: dueDate
-        });
+    saveEmailJob(emailData) {
+        const id = '1234';
+        // let id = Emails.insert({
+        //     email:'ad@alexanderditzend.com',
+        //     givenName: 'alex',
+        //     family:'Aceite',
+        //     dueDate: '2018.06.25T09:00:00-0300'
+        // });
+        return id;
     },
     checkEmailJobs() {
         let now = new Date();
