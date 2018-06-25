@@ -114,6 +114,7 @@ reactive-dict@1.1.8
 reactive-var@1.0.10
 reload@1.1.10
 retry@1.0.8
+risul:mailgun@0.0.2
 routepolicy@1.0.11
 rzymek:moment-locale-es@2.12.0
 service-configuration@1.0.10

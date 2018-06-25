@@ -8,7 +8,6 @@ import {
 Meteor.methods({
     'cars.insert' (data) {
         check(data, Object);
-
         if (!Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
@@ -24,7 +23,7 @@ Meteor.methods({
     },
     'cars.sell' (data) {
         check(data, Object);
-    
+        console.log(`data in cars.sell ${data.foo}`);
 
         if (!Meteor.userId()) {
             throw new Meteor.Error("no autorizado");

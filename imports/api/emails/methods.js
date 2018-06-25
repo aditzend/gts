@@ -1,17 +1,20 @@
-import {Email} from 'meteor/email';
+import { Email } from 'meteor/email';
+import { Mailgun } from 'meteor/risul:mailgun';
+
+
 
 // Meteor.methods({
 // 
 // 
 //     sendEmail: function() {
-//         //  var tasks = Tasks.find({}).fetch();
-//         var emailData = {
+//         //  const tasks = Tasks.find({}).fetch();
+//         const emailData = {
 //             mainTitle: "Bienvenido a RAIZ DISCOS",
 //             //tasks: tasks,
 //             unsubscribe: "http://app.raiz-discos.com/unsubscribe"
 //         };
 // 
-//         var body = EmailGenerator.generateHtml("billing", emailData);
+//         const body = EmailGenerator.generateHtml("billing", emailData);
 // 
 //         Meteor.call("sendMailgunEmail",
 //             "info@estudio-raiz.com",
@@ -22,15 +25,20 @@ import {Email} from 'meteor/email';
 // })
 
 Meteor.methods({
-    sendEmail(to, from, subject, text) {
-        // Make sure that all arguments are strings.
-        // check([to, from, subject, text], [String]);
-
-        // Let other method calls from the same client start running, without
-        // waiting for the email sending to complete.
-        this.unblock();
-
-        Email.send({ to, from, subject, text });
+    sendMailgun(jobId, data) {
+        Mailgun.messages().send(data, Meteor.bindEnvironment ((error, body) => {
+            if (error) {
+                console.log(`error sending ${error}`);
+                Emails.update({
+                    _id: jobId
+                }, {
+                    $set: {
+                        status: 'ERROR'
+                    }
+                });
+            }
+            Emails.update({_id:jobId}, {$set:{status: 'SENT'}});
+        }));
     },
     saveEmailJob(email,givenName,family,dueDate) {
         Emails.insert({
@@ -41,15 +49,24 @@ Meteor.methods({
         });
     },
     checkEmailJobs() {
+        let now = new Date();
+        now = now.toISOString();
         let jobs = Emails.find({
             dueDate: {
-                $lt: "2018-06-24T11:36:30-03:00"
-            }
+                $lt: now
+            },
+            status: {$ne: "SENT"}
         });
         jobs.map(j => {
-            console.log(`sending email to  ${j.givenName}`);
+            console.log(`sending email to  ${j.givenName} and id ${j._id}`);
             let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
-            Meteor.call('sendEmail',j.email, "gts@gts.com", "Aviso de recambio!",text);
+            const data = {
+                  from: 'Gomatodo <info@gomatodo.com>',
+                  to: j.email,
+                  subject: 'Aviso de recambio!',
+                  text: text
+              };
+            Meteor.call('sendMailgun', j._id, data);
             }
         )
     }

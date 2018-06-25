@@ -69,9 +69,6 @@ Template.Dashboard.helpers({
 
 Template.Dashboard.events({
   'click .js-send-email'() {
-    console.log('call  method ');
-        Meteor.call("checkEmailJobs");
-
     // Meteor.call('sendEmail', 'pross888@gmail.com', 'gt@serabey.com', 'hola', 'listo')
   }
 

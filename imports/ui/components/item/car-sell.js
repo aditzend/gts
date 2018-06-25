@@ -22,10 +22,15 @@ Template.Car_sell.events({
         console.log("vender ", e.target.owner);
         console.log("vender ", instance.data);
         Meteor.call("cars.sell", {
-            carId: instance.data.carId,
-             familyId: e.target.id,
-             familyName: e.target.name,
-             familyOwner:e.target.dataset.owner
+            car: {
+                id:instance.data.carId,
+                ownerGivenName:instance.data.car.brand
+            },
+            family:{
+                id:e.target.id,
+                name: e.target.name,
+                owner: e.target.dataset.owner
+            }
             });
         // Meteor.call(
         //     'sendEmail',
