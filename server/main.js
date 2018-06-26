@@ -9,7 +9,7 @@ import {
    
 if (Meteor.isServer) {
     Meteor.startup(() => {
-        process.env.MAIL_URL = Meteor.settings.mailgun.url;
+        process.env.MAIL_URL = Meteor.settings.MAILGUN_URL;
         Meteor.call("checkEmailJobs");
         
     });
