@@ -25,6 +25,10 @@ import { Mailgun } from 'meteor/risul:mailgun';
 // })
 
 Meteor.methods({
+    'email.test' (id) {
+        console.log(id);
+        return 'test';
+    },
     sendMailgun(jobId, data) {
         Mailgun.messages().send(data, Meteor.bindEnvironment ((error, body) => {
             if (error) {
@@ -40,15 +44,17 @@ Meteor.methods({
             Emails.update({_id:jobId}, {$set:{status: 'SENT'}});
         }));
     },
-    saveEmailJob(emailData) {
-        const id = '1234';
-        // let id = Emails.insert({
-        //     email:'ad@alexanderditzend.com',
-        //     givenName: 'alex',
-        //     family:'Aceite',
-        //     dueDate: '2018.06.25T09:00:00-0300'
-        // });
-        return id;
+    saveEmailJob(email, givenName, family, dueDate, owner, sale) {
+        console.log('SAVING EMAIL JOB');
+        Emails.insert({
+            email: email,
+            givenName: givenName,
+            family: family,
+            dueDate: dueDate,
+            owner: owner,
+            sale: sale,
+            status: "STORED"
+        });
     },
     checkEmailJobs() {
         let now = new Date();
@@ -60,15 +66,17 @@ Meteor.methods({
             status: {$ne: "SENT"}
         });
         jobs.map(j => {
+            const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>':'Lubritodo <info@lubritodo.com>';
             console.log(`sending email to  ${j.givenName} and id ${j._id}`);
             let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
             const data = {
-                  from: 'Gomatodo <info@gomatodo.com>',
+                  from: from,
                   to: j.email,
                   subject: 'Aviso de recambio!',
                   text: text
               };
             Meteor.call('sendMailgun', j._id, data);
+            Sales.update({_id:j.sale}, {$set : {status:"EXPIRED"}});
             }
         )
     }

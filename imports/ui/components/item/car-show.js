@@ -2,31 +2,34 @@ import './car-show.html';
 import './car-edit.js';
 import "./car-sell.js";
 
-//calcula los kms diarios
-function dkms(km,year) {
-    const age =2
-        km /
+function dailyKm(km, year) {
+    let age = km /
         (
             (moment().year() - year) * 12 * 30
         );
     return age.toFixed(0);
-}
-//calcula la fecha de recambio, time pueden ser los km o los meses
-function xng(exchange,uom,pdate,dkms) {
-    let days;
+};
+
+//calcula la fecha de recambio o dueDate
+function dueDate(exchange,uom,saleCreatedAt,dailyKm) {
+    let add;
+    let unit;
     switch (uom) {
         case "km":
-            days = exchange/dkms;
+            add = exchange / dailyKm;
+            unit = 'days'
             break;
-        case "years":
-            days = exchange * 365;    
+        case "year":
+            add = exchange;
+            unit = 'years'
             break;
-        case "months":
-            days = exchange * 30;
+        case "month":
+            add = exchange;
+            unit = 'months'
     }
+    return moment(saleCreatedAt).add(add, unit).format('DD.MM.YYYY');
+};
 
-    return moment().add(days,'days');
-}
 
 Template.Car_show.onCreated(function() {
     console.log("data en car show ", this.data);
@@ -36,7 +39,8 @@ Template.Car_show.onCreated(function() {
         expanded: false
     });
     this.autorun(() => {
-        this.subscribe("families.all");
+        this.subscribe("sales.own", Meteor.user().name);
+        this.subscribe("families.own", Meteor.user().name);
     });
 });
 
@@ -44,6 +48,29 @@ Template.Car_show.onCreated(function() {
 
 
 Template.Car_show.helpers({
+
+    //funciones nuevas
+
+    dueDate(saleId){
+        const sale = Sales.findOne({_id:saleId});
+        const family = Families.findOne({_id:sale.family.id});
+        const car = Cars.findOne({_id:sale.car.id});
+
+        const exchange = family.exchange;
+        const uom = family.uom;
+        const saleCreatedAt = sale.createdAt;
+        let dkm = dailyKm(car.km, car.year);
+        console.log(`exchange ${exchange} \n
+                    uom ${uom} \n
+                    saleca ${saleCreatedAt} \n
+                    car year ${car.year} \n
+                    car km ${car.km} \n
+                    dkm ${dkm}`);
+        return dueDate(exchange, uom, saleCreatedAt, dkm);
+        // return dueDate(exchange, uom, saleCreatedAt, dkm);
+    },
+
+    //fin funciones nuevas
 
     sellArgs(id) {
         return {
@@ -55,9 +82,11 @@ Template.Car_show.helpers({
     car() {
         return Template.instance().data.car;
     },
-    daylyKm() {
-        const data = Template.instance().data;
-        return dkms(data.km, data.year);
+    sales(carId) {
+        return Sales.find({
+            'car.id': carId,
+            status: "ALIVE"
+        });
     },
     familyX(f) {
         const exchange = Families.findOne({name:f}, { exchange: 1});
@@ -130,6 +159,25 @@ Template.Car_show.events({
 
     },
     'click .js-delete-purchase':function(evt,ins) {
-        console.log(`delete purchase ${evt.target.id}`);
+
+          swal({
+                  title: "Borramos esta venta ?",
+                  text: "No se puede recuperar esta informacion!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Sí, borrar!",
+                  cancelButtonText: "No, cancelar por favor!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+              },
+              function (isConfirm) {
+                  if (isConfirm) {
+        Meteor.call('sales.delete', evt.target.id);
+                      swal("Venta eliminada.", "Se borraron los datos", "success");
+                  } else {
+                      swal("Eliminación cancelada!", "La venta esta segura :)", "error");
+                  }
+              });
     }
 });

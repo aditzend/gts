@@ -120,7 +120,6 @@ joshdellay:meteor-ladda-bootstrap
 tsega:bootstrap3-datetimepicker
 
 #TIMING
-momentjs:moment
 rzymek:moment-locale-es
 natestrauser:x-editable-bootstrap
 random@1.0.10

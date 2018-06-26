@@ -18,39 +18,43 @@ Template.Car_sell.helpers({
 });
 
 Template.Car_sell.events({
-    'click .js-sell': function(evt, ins) {
-        // console.log("vender ", e.target.owner);
-        // console.log("vender ", instance.data);
-        const car = Cars.findOne({_id:ins.data.carId});
-        // Meteor.call("cars.sell", {
-        //     car: {
-        //         id:ins.data.carId,
-        //         ownerGivenName:instance.data.car.brand
-        //     },
-        //     family:{
-        //         id:e.target.id,
-        //         name: e.target.name,
-        //         owner: e.target.dataset.owner
-        //     }
-        //      });
-        const emailData = {
-            email: car.carOwner.email,
-            givenName: car.carOwner.givenName,
-            family: evt.target.name,
-            dueDate: '2018.06.25T09:00:00-0300'
-        };
-        const emailJob = Meteor.call("saveEmailJob", emailData );
+    'click .js-sell': async function(evt, ins) {
         const saleData = {
-            emailJob: emailJob
+            car: {
+                id: ins.data.carId
+            },
+            family: {
+                id: evt.target.id,
+                name: evt.target.name,
+                owner: evt.target.dataset.owner
+            }
+        };
+
+        const priorSale = Sales.findOne({
+            'car.id': saleData.car.id,
+            'family.id':saleData.family.id,
+            'status': 'ALIVE'
+        });
+
+        if (priorSale) {
+         swal({
+             title: `Ya vendimos ${saleData.family.name} a este auto!`,
+             text: `El auto tiene  ${saleData.family.name} vigente`,
+             type: "warning",
+             showCancelButton: false,
+             confirmButtonColor: "#DD6B55",
+             confirmButtonText: "Ok",
+             // cancelButtonText: "No, cancelar por favor!",
+             closeOnConfirm: true,
+             closeOnCancel: true
+         });
+        } else {
+            Meteor.call('sales.insert', saleData);
         }
-        console.log(`sale data  ___`, saleData);
-        // Meteor.call("sales.insert", saleData)
-        // Meteor.call(
-        //     'sendEmail',
-        //     'Alice <pross888@gmail.com',
-        //     'me@exa.com',
-        //     'holaa',
-        //     'test'
-        // );
+
+        
+       
+        
+        
     }
 })

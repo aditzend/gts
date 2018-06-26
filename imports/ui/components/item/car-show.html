@@ -2,27 +2,28 @@
   <div class=" {{#if showingOptionButtons}}js-hide-option-buttons{{else}}js-show-option-buttons{{/if}}">
     <div class='row'>
       <div class='col-xs-12 col-md-12 col-lg-12'>
-          {{#with car}}
         <p class='text-right'>
-          <h1 class="text-big"><strong>{{plate}}</strong></h1>
+          <h1 class="text-big"><strong>{{car.plate}}</strong></h1>
           <!-- <h2>{{brand}} {{model}} {{year}}</h2> -->
           <!-- <p class="text-muted">Hace {{daylyKm}} km/día</p>  -->
-            <p class="text-uppercase"> {{carOwner.givenName}} {{carOwner.lastName}}</p>
+            <p class="text-uppercase"> {{car.carOwner.givenName}} {{car.carOwner.lastName}}</p>
             <!-- <p class="text-small"> {{carOwner.email}} {{carOwner.phone}}</p> -->
             <!-- <p class="text-small"> {{transDate carOwner.birthdate}}</p> -->
         </p>
         <p class="text-left"> 
             <!-- <h2>Alertas</h2> -->
-            {{#each p in purchases}}
+            {{#each s in sales car._id}}
               <!-- {{p.familyName}} {{transDate p.deathPoint}} -->
               <!-- {{#if isActive (exchangeDate "Frenos" p.createdAt)}} -->
               <!-- {{#if isActive '2018-01-01'}} -->
               <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">{{p.familyName}} </h3>
-                    <h6 class="card-subtitle mb-2 text-muted">{{p.familyOwner}}</h6>
-                    <p class="card-text">{{fexchangeDate p.familyName p.createdAt}}</p>
-                    <a id="{{p.index}}" class="card-link js-delete-purchase" style="font-size:15px;">Eliminar Esta Venta</a>
+                    <h3 class="card-title">{{s.family.name}} </h3>
+                    <h6 class="card-subtitle mb-2 text-muted">{{s.owner}}</h6>
+                    <p class="card-text">VENCE: {{dueDate s._id}} </p>
+<a id="{{s._id}}" class="btn btn-danger js-delete-purchase" style="font-size:15px;">
+  <i id="{{s._id}}" class="fa fa-trash"></i>
+</a>
                 </div>
               </div>
               <hr>
@@ -32,7 +33,6 @@
               <p class="text-muted">No hay alertas.</p>
             {{/each}}
         </p>
-          {{/with}}
           
           {{#if showingOptionButtons}}
           <button class='btn btn-sm btn-default js-edit'><i class='fa fa-pencil'> </i> Editar</button>

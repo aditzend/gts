@@ -21,24 +21,34 @@ Meteor.methods({
             createdAt: new Date()
         });
     },
-    'cars.sell' (data) {
+    async 'cars.sell' (data) {
         check(data, Object);
-        console.log(`data in cars.sell ${data.foo}`);
+        console.log(`data in cars.sell `, data);
 
         if (!Meteor.userId()) {
             throw new Meteor.Error("no autorizado");
         }
-        let emailJob = Meteor.call('saveEmailJob', 'ad@alexanderditzend.com', 'Sofi', data.familyName, '2018-06-21T11:36:30-03:00');
-        Cars.update(data.carId, {
-            $push: {
-                purchases: {
-                    familyId: data.familyId,
-                    familyName: data.familyName,
-                    familyOwner: data.familyOwner,
-                    emailJob: emailJob,
-                    createdAt: new Date()
-                }
-            }
-        })
+
+        // enviar mails
+        // crear Sale
+        
+        //  const emailData = {
+        //      email: car.carOwner.email,
+        //      givenName: car.carOwner.givenName,
+        //      family: evt.target.name,
+        //      dueDate: '2018.06.25T09:00:00-0300'
+        //  };
+        // let emailJob = Meteor.call('saveEmailJob', 'ad@alexanderditzend.com', 'Sofi', data.familyName, '2018-06-21T11:36:30-03:00');
+        // Cars.update(data.carId, {
+        //     $push: {
+        //         purchases: {
+        //             familyId: data.familyId,
+        //             familyName: data.familyName,
+        //             familyOwner: data.familyOwner,
+        //             emailJob: emailJob,
+        //             createdAt: new Date()
+        //         }
+        //     }
+        // })
     }
 })

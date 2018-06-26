@@ -1,3 +1,6 @@
+//calcula el promedio de kms diarios
+
+
 postSignUp = function(userId, info) {
     console.log('SIGN UP');
     // FlowRouter.go('exit');
@@ -151,7 +154,7 @@ workfor = function(caller) {
       console.log('workfor CALLED BY :', caller);
       return {
         _id:Meteor.userId(),
-      name:'Freelance',
+      name: '',
       logo: false
     }
 };
@@ -164,7 +167,7 @@ wf = function(caller) {
       console.log('NO JOBS FOUND');
       return {
         _id: Meteor.userId(),
-        name:'Freelance',
+        name: '',
         logo: false
       };
     }else{
