@@ -3,7 +3,7 @@
     <!-- <h6>selected item : {{selectedItem}}</h6> -->
     <div class="list-item">
     <div class="">
-      <button class="js-deselect-item btn btn-primary">
+<button style="margin:3px;" class="js-deselect-item btn btn-primary">
       <i class='fa fa-arrow-left'></i>
         {{_ "Back to search"}}
       </button>
@@ -14,8 +14,8 @@
           {{> Car_edit (editCarArgs selectedItem)}}
 
         {{else}}
-          <button class="btn btn-danger js-delete" id={{selectedItem}}>eliminar</button>
-          <button class="btn btn-warning js-edit" id={{selectedItem}}>editar</button>
+          <button style="margin:3px;" class="btn btn-danger js-delete" id={{selectedItem}}>eliminar</button>
+          <button style="margin:3px;" class="btn btn-warning js-edit" id={{selectedItem}}>editar</button>
           <!-- {{> Item_show showthis}} -->
           {{> Car_show (showCarArgs selectedItem)}}
           <!-- {{> Item_motor_show (showItemArgs selectedItem)}} -->

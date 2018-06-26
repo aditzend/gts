@@ -10,6 +10,7 @@
             <!-- <p class="text-small"> {{carOwner.email}} {{carOwner.phone}}</p> -->
             <!-- <p class="text-small"> {{transDate carOwner.birthdate}}</p> -->
         </p>
+        <hr>
         <p class="text-left"> 
             <!-- <h2>Alertas</h2> -->
             {{#each s in sales car._id}}
@@ -18,12 +19,13 @@
               <!-- {{#if isActive '2018-01-01'}} -->
               <div class="card">
                 <div class="card-body">
+<a id="{{s._id}}" class="btn btn-danger js-delete-purchase" style="float:right;font-size:15px;">
+  <i id="{{s._id}}" class="fa fa-trash"></i>
+</a>
                     <h3 class="card-title">{{s.family.name}} </h3>
                     <h6 class="card-subtitle mb-2 text-muted">{{s.owner}}</h6>
                     <p class="card-text">VENCE: {{dueDate s._id}} </p>
-<a id="{{s._id}}" class="btn btn-danger js-delete-purchase" style="font-size:15px;">
-  <i id="{{s._id}}" class="fa fa-trash"></i>
-</a>
+
                 </div>
               </div>
               <hr>
