@@ -14,36 +14,36 @@ const connectionProperties = {
     user: Meteor.settings.ftp.user,
     password: Meteor.settings.ftp.password
 };
-c.on('ready', Meteor.bindEnvironment(() => {
-    
-        const emails = Cars.find();
-        let arr = [];
-        emails.map((car) => arr.push([car.carOwner.givenName,car.carOwner.email]));
-        let csv = Papa.unparse({
-            fields: ['Nombre', 'Emailx'],
-            data: arr
-        });
-        let localFile = base + '/gts.csv';
-          fs.writeFile(localFile, csv, (err) => {
-              if (err) throw err;
-          });
-          let destinyFile = 'mails-gtsystem.csv';
-        
-    c.put(localFile, destinyFile, function (err) {
-        if (err) throw err;
-        console.log('csv uploaded');
-        c.end();
-    });
-}));
 
-c.connect(connectionProperties);
 
 
 
 
 Meteor.methods({
     'updateEmailFile'() {
-        
+        c.on('ready', Meteor.bindEnvironment(() => {
+
+            const emails = Cars.find();
+            let arr = [];
+            emails.map((car) => arr.push([car.carOwner.givenName, car.carOwner.email]));
+            let csv = Papa.unparse({
+                fields: ['Nombre', 'Email'],
+                data: arr
+            });
+            let localFile = base + '/gts.csv';
+            fs.writeFile(localFile, csv, (err) => {
+                if (err) throw err;
+            });
+            let destinyFile = 'mails-gtsystem.csv';
+
+            c.put(localFile, destinyFile, function (err) {
+                if (err) throw err;
+                console.log('csv uploaded');
+                c.end();
+            });
+        }));
+
+        c.connect(connectionProperties);
     }
 });
 
