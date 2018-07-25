@@ -133,3 +133,5 @@ tap:i18n
 shell-server@0.2.1
 matb33:bootstrap-print
 risul:mailgun
+harrison:papa-parse
+pfafman:filesaver
