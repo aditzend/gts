@@ -1,9 +1,7 @@
 import Papa from 'papaparse';
 
 import path from 'path';
-// import fs from 'file-system';
 let fs = require('fs');
-// import ftpClient from 'ftp-client';
 let Client = require('ftp');
 let base = path.resolve('.');
 
@@ -34,7 +32,7 @@ Meteor.methods({
             fs.writeFile(localFile, csv, (err) => {
                 if (err) throw err;
             });
-            let destinyFile = 'mails-gtsystem.csv';
+            let destinyFile = 'local-mails-gtsystem.csv';
 
             c.put(localFile, destinyFile, function (err) {
                 if (err) throw err;
@@ -42,9 +40,51 @@ Meteor.methods({
                 c.end();
             });
         }));
+        c.connect(connectionProperties);
+    },
+    'updateLubritodoSalesFile' () {
+        console.log('updating lubritodo sales file')
+        c.on('ready', Meteor.bindEnvironment(() => {
 
+            const sales = Sales.find({owner: "Gomatodo"});
+            let arr = [];
+            sales.map((sale) => arr.push([sale._id,
+                                        sale.car.id,
+                                         sale.family.id,
+                                        sale.family.name,
+                                        sale.dueDate,
+                                        sale.createdAt,
+                                        sale.owner,
+                                        sale.status,
+                                        sale.author
+                                        ]));
+            let csv = Papa.unparse({
+                fields: ['_id',
+                         'car.id',
+                          'family.id', 
+                          'family.name', 
+                          'dueDate',
+                           'createdAt', 
+                           'owner',
+                            'status',
+                         'author'],
+                data: arr
+            });
+            let localFile = base + '/localLubritodoSales.csv';
+            fs.writeFile(localFile, csv, (err) => {
+                if (err) throw err;
+            });
+            let destinyFile = 'local-sales-lubritodo-gtsystem.csv';
+
+            c.put(localFile, destinyFile, function (err) {
+                if (err) throw err;
+                console.log('csv uploaded');
+                c.end();
+            });
+        }));
         c.connect(connectionProperties);
     }
+
 });
 
 

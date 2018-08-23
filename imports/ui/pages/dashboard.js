@@ -4,7 +4,7 @@ import '/imports/ui/components/rel/rel-customer-edit.js';
 import '/imports/ui/panels/customers-panel.js';
 // import '/imports/ui/panels/payment-methods-panel.js';
 // import '/imports/ui/panels/vendors-panel.js';
-// import '/imports/ui/panels/orders-panel.js';
+import '/imports/ui/panels/orders-panel.js';
 // import '/imports/ui/panels/purchases-panel.js';
 import '/imports/ui/panels/items-panel.js';
 // import '/imports/ui/panels/hospitals-panel.js';

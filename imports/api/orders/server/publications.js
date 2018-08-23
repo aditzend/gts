@@ -3,21 +3,19 @@ import {
 }
 from 'meteor/meteor';
 
-//
-// import {
-//   Companies
-// }
-// from '../companies.js';
-// Meteor.publish("companies.public", function companiesPublic() {
-//     return Companies.find({}, {
-//         fields: {
-//             ssok: false
-//         }
-//     });
-// });
 Meteor.publish('Orders.test', function ordersTest() {
     if (this.userId) {
         return Orders.find();
+    } else {
+        this.ready();
+    }
+
+});
+Meteor.publish('Orders.byChannel', function ordersByChannel(channel) {
+    if (this.userId) {
+        return Orders.find({
+            channel:channel
+        });
     } else {
         this.ready();
     }

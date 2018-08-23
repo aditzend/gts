@@ -14,7 +14,7 @@ Template.registerHelper("formatDate", function(D, M, Y) {
 
 
 Template.registerHelper("appname", function() {
-  return 'GT System';
+  return 'Mitrol Biometrics';
 });
 Template.registerHelper("logo", function() {
   const company = workfor('logo helper at global-helpers');

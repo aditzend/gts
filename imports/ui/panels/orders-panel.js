@@ -5,8 +5,7 @@ Template.Orders_panel.onCreated(function() {
   this.autorun( () => {
     if(Meteor.user()){
       const w = wf('orders-panel.js');
-      console.log('wf._id is', w._id);
-      this.subscribe('Orders.own',w._id);
+      this.subscribe('Orders.test');
     }else{
       console.log('cannot call wf from orders-panel.js');
     }
@@ -15,9 +14,69 @@ Template.Orders_panel.onCreated(function() {
 
 Template.Orders_panel.helpers({
 
-  orders() {
-    return Orders.find({},{limit: 6, sort:{createdAt:-1}});
+  explain(type) {
+    switch (type) {
+      case 'validation_finished':
+        return 'Validación finalizada'
+        break
+      case 'validation_started':
+        return 'Validación comenzada'
+        break
+      case 'enrolment_finished':
+        return 'Enrolamiento exitoso'
+        break
+      default:
+        return 'Procesando...'
+    }
   },
+  countEnroled() {
+    return Orders.find({type: 'enrolment_finished'}).count()
+  },
+  countAccepted() {
+    return Orders.find({type: 'validation_finished', passed: true}).count()
+  },
+  countRejected() {
+    return Orders.find({type: 'validation_finished', passed: false}).count()
+  },
+  clean(user) {
+    return '29903390'
+  },
+   channel1() {
+       return Orders.find({
+         channel: 1
+       }, {
+         sort: {
+           createdAt: -1
+         }
+       })
+     },
+     channel2() {
+       return Orders.find({
+         channel: 2
+       }, {
+         sort: {
+           createdAt: -1
+         }
+       });
+     },
+     channel3() {
+       return Orders.find({
+         channel: 3
+       }, {
+         sort: {
+           createdAt: -1
+         }
+       });
+     },
+     channel4() {
+       return Orders.find({
+         channel: 4
+       }, {
+         sort: {
+           createdAt: -1
+         }
+       });
+     },
   timeFromOrderCreation(createdAt) {
     return moment(createdAt).fromNow();
   },

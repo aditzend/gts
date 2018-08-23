@@ -3,6 +3,8 @@ import { Meteor } from 'meteor/meteor';
 
 //api declarations
 import '../../api/accounting/accounts/accounts.js';
+import '../../api/actions/actions.js';
+import '../../api/actions/methods.js';
 import '../../api/accounting/general-ledger/general-ledger.js';
 import '../../api/accounting/current-accounts/current-account-items.js';
 import '../../api/cars/cars.js';

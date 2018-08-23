@@ -1,4 +1,6 @@
 //declarations
+import '../../api/actions/actions.js';
+import '../../api/actions/methods.js';
 import '../../api/accounting/accounts/accounts.js';
 import '../../api/accounting/general-ledger/general-ledger.js';
 import '../../api/accounting/current-accounts/current-account-items.js';
@@ -47,6 +49,7 @@ import '../../api/users/methods.js';
 import '../../api/accounting/current-accounts/server/publications.js';
 import '../../api/accounting/accounts/server/publications.js';
 import '../../api/accounting/general-ledger/server/publications.js';
+import '../../api/actions/server/publications.js';
 import '../../api/cars/server/publications.js';
 import '../../api/controlling/profit-centers/server/publications.js';
 import '../../api/controlling/cost-centers/server/publications.js';

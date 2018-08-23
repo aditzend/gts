@@ -9,8 +9,9 @@ import {
    
 if (Meteor.isServer) {
     Meteor.startup(() => {
-        process.env.MAIL_URL = Meteor.settings.mailgun.url;
-        Meteor.setInterval(() => Meteor.call("checkEmailJobs"), 60 * 1000);
-        Meteor.setInterval(() => Meteor.call("updateEmailFile"), 5 * 60 * 1000);
+        // process.env.MAIL_URL = Meteor.settings.mailgun.url;
+        // Meteor.setInterval(() => Meteor.call("checkEmailJobs"), 60 * 1000);
+        // Meteor.setInterval(() => Meteor.call("updateEmailFile"), 1 * 60 * 1000);
+        // Meteor.setInterval(() => Meteor.call("updateLubritodoSalesFile"), 1 * 10 * 1000);
     });
 }
