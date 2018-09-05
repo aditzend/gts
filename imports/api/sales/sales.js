@@ -13,6 +13,6 @@ Sales = new Mongo.Collection('sales');
 Sales.before.insert(function (userId, doc) {
     doc.createdAt = moment().format();
     doc.author = Meteor.userId();
-    doc.owner = Meteor.user().name;
+    // doc.owner = Meteor.user().name;
 });
 
