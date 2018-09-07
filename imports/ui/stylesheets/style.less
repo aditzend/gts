@@ -1,126 +1,15 @@
-// Import Google font
-//@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
- //@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,latin-ext");
- //@import "/fonts/proximanova-regular.otf";
+//Own Syles
+@import "own/colors.less";
+@import "own/fonts.less";
+@import "own/customize.less";
+@import "own/mixins.less";
+@import "own/vars.less";
+@import "own/forms.less";
 
- @font-face {
- 	font-family: Aileron-Light;
- 	src: url('/fonts/Aileron-Light.otf');
- }
+// Styles for landing page
+@import "globals/landing.import.less";
 
-
-
-
-// Color list DARK THEME
-@color-default:lighten(@color-background, 10%);
-@color-primary-dark:#3F8ECD;
-@color-primary-light:#2c92a2;
-@color-violet:#596587;
-@color-blue:#31B9CE;
-// @color-green: repeating-linear-gradient(90deg, #81D2D5, #53A8CC);
-@color-green: #5b944d;
-@color-yellow:#F4CC45;
-@color-orange:#F4CC45;
-@color-red:#9e424f;
-@color-red-deep:#c0392b;
-@color-female:#81488a;
-// Additional colors
-// @color-background: #1D1D32;
-// @color-background-gradient: #49657A;
-@color-background: #2d3140;
-@color-background-gradient: #121b39;
-// @color-background: #gradient .radial;
-@color-nav: #343743;
-@color-sidebar: #343743;
-@color-header: #343743;
-@color-panel: rgba(255,255,255,0.1);
-@color-panel-header: darken(@color-panel, 40%);
-@color-text: #fff;
-@color-text-light: #fff;
-@color-icon: #F3F6FC;
-@color-bright: #F3F6FC;
-@color-background-boxed: lighten(@color-background, 3%);
-
-@color-text-default: @color-background;
-@border-color: rgba(255,255,255,0.3);
-
-
-@color-alert-100:#c0392b;
-@color-alert-200:#e67e22;
-@color-alert-300:#ffb606;
-@color-alert-400:#9b59b6;
-@color-alert-500:#6ab0df;
-@color-alert-600:#7b8ea1;
-@color-alert-700: #c9cbcd;
-@color-alert-800: #d8d8d9;
-
-.map_canvas {
-  width: 100%;
-  height: 400px;
-  margin: 10px 20px 10px 0;
-}
-
-div.tooltip {
-    position: absolute;
-    text-align: center;
-    width: 90px;
-    height: 48px;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
-}
-path {
-    stroke: steelblue;
-    stroke-width: 1;
-    fill: none;
-  }
-
-  .axis {
-    shape-rendering: crispEdges;
-  }
-
-  .x.axis line {
-    stroke: lightgrey;
-  }
-
-  .x.axis .minor {
-    stroke-opacity: .5;
-  }
-
-  .x.axis path {
-    display: none;
-  }
-
-  .y.axis line, .y.axis path {
-    fill: none;
-    stroke: #000;
-  }
-
-#laytop {
-  z-index: 2000;
-    position: relative;
-    color:red;
-}
-
-input {
-  color: #555 !important;
-}
-
-
-
-
-
-
-
-// Additional variables
-@menu-width: 180px;
-@main-transition: all 0.1s ease-out 0s;
-
-
-// Import all styles
+// Import all styles from template
 @import "globals/margins.import.less";
 @import "globals/alerts.import.less";
 @import "globals/modal.import.less";
@@ -150,10 +39,6 @@ input {
 @import "globals/forum.import.less";
 @import "globals/mailbox.import.less";
 @import "globals/loader.import.less";
-@import "own/search.import.less";
-@import "own/printable-doc.import.less";
-@import "own/alert-categories.import.less";
 @import "globals/print.import.less";
 
-// Styles for landing page
-@import "globals/landing.import.less";
+

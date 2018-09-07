@@ -27,6 +27,12 @@ import {
 }
 from 'meteor/kadira:flow-router';
 
+import React from 'react';
+import {
+    render
+} from 'react-dom';
+import HelloWorld from '../react/car-form';
+
 import './car-edit.html';
 
 
@@ -38,6 +44,9 @@ Template.Car_edit.onCreated(function() {
 });
 
 Template.Car_edit.onRendered(function() {
+    //cargar react form
+
+
     const instance = Template.instance();
     const car = instance.data.car;
     console.log('on rendered EDIT ITEM >>>>>>', car);

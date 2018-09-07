@@ -11,9 +11,9 @@ Template.Car_search.helpers({
     car_searchIndexAttributes: function() {
         return {
             'id': 'search-input',
-            'class': 'form-control',
+            'class': 'form-control plate',
             'autocomplete': 'off',
-            'placeholder': " 'NVF254'... ",
+            'placeholder': " 'NVF254'",
             'style': "text-transform:uppercase"
         };
     },

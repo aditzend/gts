@@ -26,5 +26,3 @@ let oldCars = Cars.find({
 
     }
 })
-
-// console.log(oldCars)

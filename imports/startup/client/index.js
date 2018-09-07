@@ -120,27 +120,4 @@ function startAll() {
 
 Meteor.startup(function() {
     startAll();
-    /*$('body').addClass('fixed-navbar');*/
-  
-
-
-
-
-
-    // const workerRel = Rels.findOne({
-    //     type: 'worker'
-    // });
-    //
-    // Meteor.setTimeout(function() {
-    //     Session.set('workfor', workerRel.destiny);
-    //     Session.set('workerRelId', workerRel._id);
-
-    //     console.log("work rel  set to : ", Session.get('workerRelId'));
-    //
-    //     console.log(workerRel);
-    //
-    // }, 10000);
-
-
-
 });

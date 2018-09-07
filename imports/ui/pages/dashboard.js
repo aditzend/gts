@@ -18,6 +18,9 @@ import "/imports/ui/panels/families-panel.js";
 // import '/imports/ui/components/rel/validate-worker-rels.js';
 import './dashboard.html';
 
+//react
+import '/imports/ui/components/react/car-form-container'
+
 
 
 Template.Dashboard.onCreated(function() {

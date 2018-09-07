@@ -1,3 +1,7 @@
+@import "../own/colors";
+@import "../own/vars";
+@import "../own/mixins";
+
 /* Panels */
 .sticker-15 {
   background-color: #fff;
@@ -10,7 +14,8 @@
   float:left;
 }
 .sticker-6 {
-  background-color: @color-panel;
+  background-color: @color-main-dark;
+  // background-color: @color-panel;
   color: @color-primary-light;
   padding: 15px;
   border: 1px dashed black;
@@ -27,9 +32,7 @@
 .panel-body{
   // background-color: @color-background !important;
 }
-.panel-heading{
-  border-radius: 0px !important;
-}
+
 .logo-15 {
   width: 80px;
   float: right;
@@ -42,16 +45,21 @@
 }
 
 .hpanel > .panel-heading {
-  color: inherit;
-  font-weight: 600;
-  padding: 10px 4px;
+  color: @color-headings-dark;
+  // color: inherit;
+  // font-weight: 600;
+  padding: 15px 9px;
   transition: all .3s;
-  border: 1px solid transparent;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom: @panel-border-width solid @color-border-light;
+  // .border-radius(0px);
+  // border-bottom: 1px solid;
 }
 
 .hpanel .hbuilt.panel-heading {
   border: none;
-  border-radius: 0px !important;
+  border-radius: 0px !important ;
 
 }
 
@@ -90,16 +98,22 @@
 .hpanel.panel-group .panel-body {
   border-top: none;
 }
+.hpanel.panel-body {
+  border: none;
+}
 
 .panel-collapse .panel-body {
   border: none;
 }
 
 .hpanel {
-  background-color: none;
-  border: none;
+  background-color: @color-background;
+  .border-radius(@panel-radius);
   box-shadow: none;
   margin-bottom: 25px;
+  border-style: solid;
+  border-width: @panel-border-width;
+  border-color: @color-border-light;
 }
 
 .panel-tools {
@@ -136,7 +150,7 @@
 }
 
 .hpanel.hviolet .panel-body {
-  border-top: 2px solid @color-violet;
+  // border-top: 2px solid @color-violet;
 }
 
 .hpanel.horange .panel-body {
@@ -206,9 +220,7 @@
 .panel-group .panel-heading {
   background-color: blue;
 }
-.hpanel .panel-heading {
-  background-color: @color-panel-header;
-}
+
 
 .small-header .hpanel {
   margin-bottom: 0;

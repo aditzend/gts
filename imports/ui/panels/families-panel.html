@@ -6,20 +6,19 @@
  
     {{#each family in families}}
         <button 
-            class="btn btn-lg btn-success js-show-family" 
+            class="btn btn-lg btn-secondary btn-fix-width btn-outline js-show-family" 
             id={{family._id}}
-            style="margin:30px;"
             > 
             {{family.name}}
         </button>
     {{/each}}
     {{#if creating}}
-        <button class="btn btn-danger js-cancel-create">cancelar</button>
+        <button class="btn btn-danger js-cancel-create">Cancelar</button>
         
         {{> Families_create createFamilyArgs}}
 
     {{else}}
-        <button class="btn btn-primary btn-lg js-add-family">crear producto</button>    
+<button class="btn btn-success btn-fix-width btn-lg js-add-family">Crear Producto</button>
     {{/if}}
     {{/panel}}
 </template>

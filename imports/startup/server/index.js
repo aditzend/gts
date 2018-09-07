@@ -3,7 +3,11 @@
 
 import './email.js';
 import './register-api.js';
-import './update-sales.js'
+
+//para corregir ventas viejas
+// import './update-sales.js'
+
+
 // import './connection.js';
 // import './importer.js';
 
