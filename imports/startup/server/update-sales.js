@@ -1,4 +1,5 @@
 
+console.log('update-sales');
 let oldCars = Cars.find({
     createdAt: {
         $lt: "2018-06-27T12:00:00+00:00",
@@ -6,7 +7,8 @@ let oldCars = Cars.find({
     purchases: {
         $ne: undefined
     }
-}, {$limit: 3}).forEach((car) => {
+}
+).forEach((car) => {
     for (i=0;i<car.purchases.length;i++) {
     console.log(`Car :  ${car._id}\n
     Purchase # : ${i} \n

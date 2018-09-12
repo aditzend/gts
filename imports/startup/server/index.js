@@ -4,8 +4,6 @@
 import './email.js';
 import './register-api.js';
 
-//para corregir ventas viejas
-// import './update-sales.js'
 
 
 // import './connection.js';
@@ -32,6 +30,7 @@ import './register-api.js';
 
 
 Meteor.startup(function() {
+    Meteor.call("cars.correct")
     // Meteor.call("importSql");
     // process.env.MAIL_URL = Meteor.settings.smtp;
     // process.env.ixDbPass = Meteor.settings.ixDbPass;
