@@ -3,7 +3,7 @@
         <div class="col-xs-12">
             <h1>Que producto compró este cliente? </h1>
              {{#each f in families}}
-                <button id="{{f._id}}" name="{{f.name}}" data-owner="{{f.owner}}" class='btn btn-sm btn-primary js-sell' style="margin:3px;" type="button" >{{f.name}} - {{f.owner}}</button>
+                <button id="{{f._id}}" name="{{f.name}}" data-owner="{{f.owner}}" class='btn btn-sm btn-primary js-sell' style="margin:3px;" type="button" >{{f.name}}</button>
             {{/each}}
 
         </div>

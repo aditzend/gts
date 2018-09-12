@@ -13,7 +13,7 @@ Template.Car_sell.onCreated(function() {
 
 Template.Car_sell.helpers({
     families() {
-        return Families.find();
+        return Families.find({}, {$sort: { createdAt:1}});
     }
 });
 

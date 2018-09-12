@@ -30,7 +30,7 @@ import './register-api.js';
 
 
 Meteor.startup(function() {
-    Meteor.call("cars.correct")
+    // Meteor.call("cars.correct")
     // Meteor.call("importSql");
     // process.env.MAIL_URL = Meteor.settings.smtp;
     // process.env.ixDbPass = Meteor.settings.ixDbPass;

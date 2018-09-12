@@ -71,6 +71,7 @@ Meteor.methods({
         Meteor.call('saveEmailJob', car.carOwner.email, car.carOwner.givenName, family.name, due, family.owner, sale);
     },
     'cars.correct' () {
+        console.log(`correcting cars`);
         Cars.find({
             createdAt: {
                 $lt: "2018-06-27T12:00:00+00:00",
