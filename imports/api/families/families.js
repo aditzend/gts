@@ -13,15 +13,20 @@ Families.before.insert(function(userId,doc) {
 Meteor.methods({
     'families.insert'(data) {
         check(data, Object);
-
         if(!Meteor.user()) {
             throw new Meteor.Error("no autorizado");
         }
-
         Families.insert({
             name: data.name,
             exchange: data.exchange,
             uom: data.uom
         });
+    },
+    'families.remove'(id) {
+        check(id, String)
+        if (!Meteor.user()) {
+            throw new Meteor.Error("no autorizado");
+        }
+        Families.remove(id)
     }
 });
