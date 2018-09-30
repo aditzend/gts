@@ -4,11 +4,11 @@ import {
     Text
 } from 'informed';
 
-const validate = value => {
-    return !value || value.length < 5 ? 'Field must be longer than five characters' : null;
-}
+// const validate = value => {
+//     return !value || value.length < 5 ? 'Field must be longer than five characters' : null;
+// }
 
-class CarForm extends React.Component {
+export default class CarForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -33,8 +33,8 @@ class CarForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <Form>
+            // <div>
+                /* <Form>
                     {({ formState }) => (
                         <div>
                             <Text field="plate" validateOnBlur validate={validate} className="form-control plate" />
@@ -45,13 +45,14 @@ class CarForm extends React.Component {
                             </code>
                         </div>
                     )}
-                </Form>
-            </div>
+                </Form> */
+                <h1>react CarForm component</h1>
+            
+            // </div>
         );
     }
 }
 
-export default CarForm
 
 // export default class CarForm extends React.Component {
 //     render() {

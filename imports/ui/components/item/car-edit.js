@@ -31,7 +31,8 @@ import React from 'react';
 import {
     render
 } from 'react-dom';
-import HelloWorld from '../react/car-form';
+
+import CarForm from '../react/car-form'
 
 import './car-edit.html';
 
@@ -151,9 +152,11 @@ Template.Car_edit.onRendered(function() {
 });
 
 Template.Car_edit.helpers({
-
     car() {
         return Template.instance().data.car;
+    },
+    CarForm() {
+        return CarForm
     }
 })
 

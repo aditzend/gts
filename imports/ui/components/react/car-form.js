@@ -1,37 +1,42 @@
-// import React from 'react';
-// import { Form } from 'react-advanced-form';
+import React from 'react';
+import { createField, fieldPresets } from 'react-advanced-form'
 // import { Input, Button } from 'react-advanced-form-addons';
 
-// export default class SyncValidation extends React.Component {
-//     registerUser = ({ serialized }) => {
-//         alert(JSON.stringify(serialized, null, 2));
+const CarForm = (props) => {
+    const { fieldProps, fieldState } = props
+    const { errors } = fieldState
 
-//         /* Perform async request with the serialized data */
-//         return new Promise(resolve => resolve());
-//     }
+    return (
+        <div className="input">
+            <input {...fieldProps} />
 
-//     render() {
-//         return (
-//             <Form action={this.registerUser}>
-//                 <Input
-//                     name="userEmail"
-//                     type="email"
-//                     label="E-mail"
-//                     required />
-//                 <Input
-//                     name="userPassword"
-//                     type="password"
-//                     label="Password"
-//                     required />
-//                 <Input
-//                     name="confirmPassword"
-//                     type="password"
-//                     label="Confirm password"
-//                     required
-//                     skip />
+            {errors && errors.map((error) => (
+                <div className="text-error">{error}</div>
+            ))}
+        </div>
+    )
+}
 
-//                 <Button primary>Register</Button>
-//             </Form>
-//         );
-//     }
-// }
+export default createField(fieldPresets.input)(CarForm)
+
+
+{/* <Form action={this.registerUser}>
+    <Input
+        name="userEmail"
+        type="email"
+        label="E-mail"
+        required />
+    <Input
+        name="userPassword"
+        type="password"
+        label="Password"
+        required />
+    <Input
+        name="confirmPassword"
+        type="password"
+        label="Confirm password"
+        required
+        skip />
+
+    <Button primary>Register</Button>
+</Form> */}
