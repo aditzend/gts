@@ -124,13 +124,6 @@ Meteor.methods({
                     text: text
                 };
                 Meteor.call('sendMailgun', j._id, data);
-                Sales.update({
-                    _id: j.sale
-                }, {
-                    $set: {
-                        status: "EXPIRED"
-                    }
-                });
             })
     }
 });
