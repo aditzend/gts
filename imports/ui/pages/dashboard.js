@@ -19,7 +19,7 @@ import "/imports/ui/panels/families-panel.js";
 import './dashboard.html';
 
 //react
-import '/imports/ui/components/react/car-form-container'
+// import '/imports/ui/components/react/car-form-container'
 
 
 

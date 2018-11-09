@@ -1,0 +1,12 @@
+{
+    "mailgun": {
+        "key": "XXXkey-ca749cc6a5c8daa7b2a85213547decab",
+        "domain": "mailgun.gomatodo.com",
+        "url": "smtp://postmaster%40mailgun.gomatodo.com:a34e2bdecff4d0990bb443603d30fbb5@smtp.mailgun.org:465"
+    },
+    "ftp": {
+          "host": "XXXserabey.com",
+              "user": "gts@serabey.com",
+              "password": "R6M2%t%lT0l["
+    }
+}

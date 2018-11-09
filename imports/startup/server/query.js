@@ -15,6 +15,7 @@ const sqlQuery = function (connObj) {
         usuarios.matricula,\
         usr_pro.death_point,\
         productos.name_pro,\
+        productos.firma_admin,\
         usr_pro.time_set\
         from usuarios\
         inner join usr_pro\

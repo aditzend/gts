@@ -44,17 +44,22 @@ Meteor.methods({
             Emails.update({_id:jobId}, {$set:{status: 'SENT'}});
         }));
     },
-    saveEmailJob(email, givenName, family, dueDate, owner, sale) {
+    "emails.upsertJob"(email, givenName, family, dueDate, owner, sale) {
         console.log('SAVING EMAIL JOB');
-        Emails.insert({
-            email: email,
-            givenName: givenName,
-            family: family,
-            dueDate: dueDate,
-            owner: owner,
-            sale: sale,
-            status: "STORED"
-        });
+        Emails.upsert(
+            {dueDate: dueDate},
+            {
+                $set: {
+                    email: email,
+                    givenName: givenName,
+                    family: family,
+                    dueDate: dueDate,
+                    owner: owner,
+                    sale: sale,
+                    status: "STORED"
+                }
+            }
+          );
     },
     checkEmailJobs() {
         let now = new Date();

@@ -9,13 +9,15 @@ import {
 } from 'meteor/check';
 import moment from 'moment/moment';
 
-function dailyKm(km, year) {
-    let age = km /
-        (
-            (moment().year() - year) * 12 * 30
-        );
-    return age.toFixed(0);
-};
+function dailyKm(km, year, carCreatedAt = null) {
+    let age
+    if (carCreatedAt) {
+        age = km / ( (moment(carCreatedAt).year() - year) * 12 * 30 )
+    } else {
+        age = km / ((moment().year() - year) * 12 * 30)
+    }
+    return age.toFixed(0)
+}
 
 //calcula la fecha de recambio o dueDate
 function dueDate(exchange, uom, saleCreatedAt, dailyKm) {
@@ -41,13 +43,63 @@ function dueDate(exchange, uom, saleCreatedAt, dailyKm) {
 
 
 Meteor.methods({
+     'sales.upsertWithDate'(data) {
+         check(data, Object);
+         const car = Cars.findOne({
+             _id: data.car.id
+         });
+         const family = Families.findOne({
+             _id: data.family.id
+         });
+         const dkm = dailyKm(
+             car.km || "100000",
+             car.year || "2016",
+             data.originalCreatedAt
+             );
+
+         console.log(`family.exchange: ${family.exchange} \n`)
+         console.log(`family.uom : ${family.uom} \n`)
+         console.log(`daily kms : ${dkm} \n`)
+         console.log(`Sale created at : ${data.originalCreatedAt} \n`)
+         const due = dueDate(family.exchange,
+             family.uom,
+             // "2018-05-02T02:59:10.567Z",
+             data.originalCreatedAt,
+             dkm);
+         const sale = Sales.upsert(
+             {dueDate: due},
+             {
+                   $set: {
+                       car: {
+                           id: car._id
+                       },
+                       family: {
+                           id: family._id,
+                           name: family.name
+                       },
+                       dueDate: due,
+                       originalCreatedAt: moment(data.originalCreatedAt).toISOString(),
+                       // createdAt: moment().toISOString(),
+                       owner: family.owner,
+                       status: "ALIVE"
+                   }
+             })
+         Meteor.call('emails.upsertJob', car.carOwner.email, car.carOwner.givenName, family.name, due, family.owner, sale);
+     },
     'sales.insertWithDate' (data) {
         check(data, Object);
         const car = Cars.findOne({ _id: data.car.id });
         const family = Families.findOne({ _id: data.family.id });
         const dkm = dailyKm(
             car.km || "100000",
-            car.year || "2016");
+            car.year || "2016",
+             data.originalCreatedAt
+            );
+
+            console.log(`family.exchange: ${family.exchange} \n` )
+            console.log(`family.uom : ${family.uom} \n`)
+            console.log(`daily kms : ${dkm} \n`)
+            console.log(`Sale created at : ${data.originalCreatedAt} \n`)
         const due = dueDate(family.exchange,
             family.uom,
             // "2018-05-02T02:59:10.567Z",
