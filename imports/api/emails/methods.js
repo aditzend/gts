@@ -101,7 +101,7 @@ Meteor.methods({
         renewalJobs.map(j => {
             const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>':'Lubritodo <info@lubritodo.com>';
             console.log(`sending email to  ${j.givenName} and id ${j._id}`);
-            let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
+            let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${j.family} \n Que tengas un excelente día! `;
             const data = {
                   from: from,
                   to: j.email,

@@ -1,8 +1,8 @@
-const sqlQuery = function (connObj) {
-    console.log("quering connection");
+const sqlQuery = function (params) {
+    console.log("quering connection")
     const promise = new Promise(function (resolve, reject) {
-        console.log("connection is ", connObj.conn.threadId);
-        const offset = String(connObj.offset);
+        console.log("connection is ", params.connection.threadId);
+        const offset = String(params.offset)
         const selector = 'select \
         usuarios.name_usr,\
         usuarios.email_usr,\
@@ -15,6 +15,7 @@ const sqlQuery = function (connObj) {
         usuarios.matricula,\
         usr_pro.death_point,\
         productos.name_pro,\
+        productos.ID_pro,\
         usr_pro.time_set\
         from usuarios\
         inner join usr_pro\
@@ -22,16 +23,17 @@ const sqlQuery = function (connObj) {
         inner join productos\
         on productos.ID_pro = usr_pro.ID_pro\
           limit 1 offset ' + offset + ' ;';
-        connObj.conn.query(selector,
+        params.connection.query(selector,
             function (err, rows, fields) {
                 if (err) {
                     reject(err);
                 } else {
                     console.log("query ok, rows returned = ", rows.length);
-                    const result = { "connection": connObj.conn, "rows": rows , "owner": connObj.owner};
+                    const result = { "connection": params.connection, "rows": rows , "owner": params.owner,"offset":params.offset};
                     resolve(result);
                 }
             });
+        // params.connection.end(err => (err)?console.log(`Error closing connection:${err}`):console.log('MySQL connection closed'))
 
     });
     return promise;
