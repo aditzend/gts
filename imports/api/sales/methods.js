@@ -177,6 +177,7 @@ Meteor.methods({
             owner: family.owner,
             status:"ALIVE"
         });
+        Meteor.call('sendThankYouEmail', car.carOwner.email, car.carOwner.givenName, family.name, family.owner)
         Meteor.call('saveEmailJob',car.carOwner.email,car.carOwner.givenName,family.name,due,family.owner, sale);
     },
     'sales.delete'(id) {

@@ -10,7 +10,7 @@ function dailyKm(km, year) {
     return age.toFixed(6);
 };
 
-//calcula la fecha de recambio o dueDate
+//calcula la fecha de recambio o dueDate, antes era el deathpoint
 function dueDate(exchange,uom,saleCreatedAt,dailyKm) {
     let add;
     let unit;
