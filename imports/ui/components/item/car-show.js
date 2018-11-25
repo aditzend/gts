@@ -7,7 +7,7 @@ function dailyKm(km, year) {
         (
             (moment().year() - year) * 12 * 30
         );
-    return age.toFixed(0);
+    return age.toFixed(6);
 };
 
 //calcula la fecha de recambio o dueDate
@@ -48,6 +48,11 @@ Template.Car_show.onCreated(function() {
 
 
 Template.Car_show.helpers({
+
+    //no confundir con la funcion
+    dailyKm(km, year) {
+        return dailyKm(km,year)
+    }, 
 
     //funciones nuevas
 
@@ -131,9 +136,6 @@ Template.Car_show.helpers({
         const instance = Template.instance();
         return instance.state.get('expanded');
     },
-    productFamilies() {
-      return [123,23,2];
-    }
 });
 
 Template.Car_show.events({
