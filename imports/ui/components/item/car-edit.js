@@ -31,16 +31,13 @@ import React from 'react';
 import {
     render
 } from 'react-dom';
-import HelloWorld from '../react/car-form';
 
 import './car-edit.html';
 
 
 
 Template.Car_edit.onCreated(function() {
-    this.autorun(() => {
-        let profitCenterSubscription = this.subscribe('profit_centers.test');
-    });
+ 
 });
 
 Template.Car_edit.onRendered(function() {
@@ -53,41 +50,86 @@ Template.Car_edit.onRendered(function() {
     instance.$('#plate')
         .val(car.plate);
 
-    // instance.$('#profitCenterSelect')
-    //     .val('ffHRBxE9GjRY2TSzH');
-    // not working   FIXXXXXXXXXXXXX
 
 
-
-
-    instance.$('[data-action=form]')
+    instance.$('[data-action=car-edit-form]')
         .validate({
             rules: {
-
+                
+                year: {
+                    required: true,
+                    range: [1900,2050]
+                },
+                km: {
+                    required: true,
+                    range: [0,9999999]
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                givenName: {
+                    required: true,
+                },
+                birthdate: {
+                    date: true
+                },
+                phone: {
+                    digits: true,
+                    minlength:8,
+                    maxlength:16
+                },
             },
             messages: {
-
+                year: {
+                    required: 'Falta completar Año!',
+                    range: 'Año incorrecto!',
+                },
+                km: {
+                    required: 'Falta completar Kms!',
+                    range: 'Kms incorrectos!',
+                },
+                email: {
+                    required: 'Falta completar email!',
+                    email: 'Este no es un email válido!',
+                },
+                givenName: {
+                    required: 'Falta completar el nombre',
+                },
+                birthdate: {
+                    date: 'fecha invalida',
+                },
+                phone: {
+                    digits: 'aca van solo numeros',
+                    minlength: 'minimo 8 numeros',
+                    maxlength: 'maximo 16 numeros'
+                },
             },
             showErrors: function(errorMap, errorList) {
+                console.log('form has errors')
+              
                 instance.$("#summary")
                     .html("El formulario tiene errores (" +
                         this.numberOfInvalids() +
                         "), ver detalles en rojo.");
                 this.defaultShowErrors();
             },
-            submitHandler: function() {
+            submitHandler: function (errorMap, errorList) {
+                    console.log('form submited')
                     // const w = workfor('item-motor-edit.js');
-                    let plate = instance.$('#plate').val();
-                    let brand = instance.$('#brand').val();
-                    let model = instance.$('#model').val();
-                    let year = instance.$('#year').val();
-                    let km = instance.$('#km').val();
-                    let givenName = instance.$('#car-owner-given-name').val();
-                    let lastName = instance.$('#car-owner-last-name').val();
-                    let gender = instance.$('#car-owner-gender').val();
-                    let email = instance.$('#car-owner-email').val();
+                    let plate = instance.$('#plateInput').val();
+                    let brand = instance.$('#brandInput').val();
+                    let model = instance.$('#modelInput').val();
+                    let year = instance.$('#yearInput').val();
+                    let km = instance.$('#kmInput').val();
+                    let givenName = instance.$('#givenNameInput').val();
+                let lastName = instance.$('#lastNameInput').val();
+                let birthdate = instance.$('#BirthdateInput').val();
+
+                    // let gender = instance.$('#car-owner-gender').val();
+                let isMale = instance.$('#carOwnerGenderInputMale').checked;
+                    let email = instance.$('#emailInput').val();
                     let phone = instance.$('#car-owner-phone').val();
-                    let birthdate = instance.$('#car-owner-birthdate').val();
                     let origin = instance.$('#originSelect').val();
 
 
@@ -102,10 +144,10 @@ Template.Car_edit.onRendered(function() {
                             carOwner: {
                               givenName: givenName,
                               lastName: lastName,
-                              gender: gender,
                               birthdate: birthdate,
                               email: email,
-                              phone: phone
+                              phone: phone,
+                              isMale: isMale,
                             },
                             origin: origin,
                             owner: 'GT'
@@ -129,7 +171,8 @@ Template.Car_edit.onRendered(function() {
                                 carOwner: {
                                     givenName: givenName,
                                     lastName: lastName,
-                                    gender: gender,
+                                    isMale: isMale,
+                                    // gender: gender,
                                     birthdate: birthdate,
                                     email: email,
                                     phone: phone
@@ -151,7 +194,12 @@ Template.Car_edit.onRendered(function() {
 });
 
 Template.Car_edit.helpers({
-
+    male() {
+        return Template.instance().data.car.carOwner && Template.instance().data.car.carOwner.isMale?'checked':'';
+    },
+    female() {
+        return Template.instance().data.car.carOwner && Template.instance().data.car.carOwner.isMale ? '' :'checked';
+    },
     car() {
         return Template.instance().data.car;
     }

@@ -3,99 +3,110 @@
     <div class="panel-heading hpanel">Ingresar/Editar {{car.plate}}</div>
     <div class="panel-body hpanel">
       <hr>
-      <form class="form-horizontal" data-action='form'>
+      <form class="form-horizontal" data-action='car-edit-form'>
         <h3>Datos del Auto</h3>
         <div class="row">
-          <div class="form-group col-xs-6">
-            <label class="control-label" for='productPrimaryDescription'>Patente</label>
-            <input id='plate' type="text" class="form-control plate" value="{{car.plate}}">
+          <div class="form-group col-lg-2 col-xs-6">
+            <label class="control-label" for='plate'>Patente</label>
+            <input id='plateInput' type="text" class="form-control plate" name='plate' value="{{car.plate}}">
             <span class='form-control-feedback'></span>
             <span class='help-block'></span>
           </div>
-          <div class="form-group col-xs-6">
-            <label class="control-label" for='productPrimaryDescription'>Marca</label>
-            <input id='brand' type="text" class="form-control" value="{{car.brand}}">
+          <div class="form-group col-lg-3 col-xs-12">
+            <label class="control-label" for='brand'>Marca</label>
+            <input id='brandInput' type="text" class="form-control" name='brand' value="{{car.brand}}" style="text-transform:uppercase">
             <span class='form-control-feedback'></span>
             <span class='help-block'></span>
           </div>
         
-        <div class="form-group col-xs-6">
+        <div class="form-group col-lg-3 col-xs-12">
           <label class="control-label" for='productPrimaryDescription'>Modelo</label>
-          <input id='model' type="text" class="form-control"  value="{{car.model}}">
+          <input id='modelInput' type="text" class="form-control"  value="{{car.model}}">
           <span class='form-control-feedback'></span>
           <span class='help-block'></span>
         </div>
-        <div class="form-group col-xs-6">
-          <label class="control-label" for='productPrimaryDescription'>A&ntilde;o</label>
-          <input id='year' type="number" class="form-control"  value="{{car.year}}">
+        <div class="form-group col-lg-2 col-xs-6">
+          <label class="control-label" for='year'>A&ntilde;o</label>
+          <input id='yearInput' type="number" class="form-control"  name="year" value="{{car.year}}">
           <span class='form-control-feedback'></span>
           <span class='help-block'></span>
         </div>
-        <div class="form-group col-xs-6">
-          <label class="control-label" for='productPrimaryDescription'>Kilometraje</label>
-          <input id='km' type="number" class="form-control"  value="{{car.km}}">
+        <div class="form-group col-lg-2 col-xs-6">
+          <label class="control-label" for='km'>Kilometraje</label>
+          <input id='kmInput' type="number" class="form-control"  name="km" value="{{car.km}}">
           <span class='form-control-feedback'></span>
           <span class='help-block'></span>
         </div>
       </div>
         <hr>
         <h3>Datos del due&ntilde;o</h3>
-        <div class="form-group">
-          <label class="control-label" for='productPrimaryDescription'>Nombre</label>
-          <input id='car-owner-given-name' type="text" class="form-control"  value="{{car.carOwner.givenName}}">
-          <span class='form-control-feedback'></span>
-          <span class='help-block'></span>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for='productPrimaryDescription'>Apellido</label>
-          <input id='car-owner-last-name' type="text" class="form-control"  value="{{car.carOwner.lastName}}">
-          <span class='form-control-feedback'></span>
-          <span class='help-block'></span>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for='productPrimaryDescription'>Fecha de Nacimiento</label>
-          <input id='car-owner-birthdate' type="date" class="form-control"  value="{{car.carOwner.birthdate}}">
-          <span class='form-control-feedback'></span>
-          <span class='help-block'></span>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for='productPrimaryDescription'>Género</label>
-          <input id='car-owner-gender' type="text" class="form-control"  value="{{car.carOwner.gender}}">
-          <span class='form-control-feedback'></span>
-          <span class='help-block'></span>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for='productPrimaryDescription'>Email</label>
-          <input id='car-owner-email' type="text" class="form-control"  value="{{car.carOwner.email}}">
-          <span class='form-control-feedback'></span>
-          <span class='help-block'></span>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for='productPrimaryDescription'>Teléfono</label>
-          <input id='car-owner-phone' type="text" class="form-control"  value="{{car.carOwner.phone}}">
-          <span class='form-control-feedback'></span>
-          <span class='help-block'></span>
-        </div>
-          <div class="form-group">
-            <label for="originSelect">Cómo nos conoció?</label>
-            <select class="form-control" id="originSelect">
-              <option value='offline'>offline/negocio</option>
-              <option value='social'>redes sociales</option>
-              <option value='mail'>mail</option>
-              <option value='ecommerce'>ecommerce</option>
-              <option value='street'>vía pública</option>
-            </select>
-          </div>
- 
 
-
-
-
+        <div class="row">
+            <div class="form-group col-lg-3 col-xs-12">
+              <label class="control-label " for='givenName'>Nombre</label>
+              <input id='givenNameInput' type="text" class="form-control" name="givenName" value="{{car.carOwner.givenName}}">
+              <span class='form-control-feedback'></span>
+              <span class='help-block'></span>
+            </div>
+            <div class="form-group col-lg-3 col-xs-12">
+              <label class="control-label" for='productPrimaryDescription'>Apellido</label>
+              <input id='lastNameInput' type="text" class="form-control" value="{{car.carOwner.lastName}}">
+              <span class='form-control-feedback'></span>
+              <span class='help-block'></span>
+            </div>
+            <div class="form-group col-lg-3 col-xs-12">
+              <!-- <label class="control-label" for='carOwnerGender'>Género</label> -->
+              <span class="control-label"><i class="fa fa-male"></i></span><input id='carOwnerGenderInputMale' type="radio" name="carOwnerGender"
+                 {{male}} />
+              <span class="control-label"><i class="fa fa-female"></i></span><input id='carOwnerGenderInputFemale' type="radio"
+                name="carOwnerGender" {{female}} />
+              <!-- <input id='car-owner-gender' type="text" class="form-control"  value="{{car.carOwner.gender}}"> -->
+              <!-- hay que reconvertir la base, porque ahora es un campo de texto y es un quilombo -->
+              <span class='form-control-feedback'></span>
+              <span class='help-block'></span>
+            </div>
+            <div class="form-group col-lg-3 col-xs-12">
+              <label class="control-label" for='birthdate'>Cumple</label>
+              <input id='carOwnerBirthdateInput' type="date" class="form-control" name="birthdate" value="{{car.carOwner.birthdate}}">
+              <span class='form-control-feedback'></span>
+              <span class='help-block'></span>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group col-lg-4 col-xs-12">
+              <label class="control-label" for='email'>Email</label>
+              <input id='emailInput' type="email" class="form-control" name="email" value="{{car.carOwner.email}}">
+              <span class='form-control-feedback'></span>
+              <span class='help-block'></span>
+            </div>
+            <div class="form-group col-lg-4 col-xs-12">
+              <label class="control-label" for='phone'>Teléfono</label>
+              <input id='car-owner-phone' type="tel" class="form-control" name="phone" value="{{car.carOwner.phone}}">
+              <span class='form-control-feedback'></span>
+              <span class='help-block'></span>
+            </div>
+            <div class="form-group col-lg-4 col-xs-12">
+              <label for="originSelect">Cómo nos conoció?</label>
+              <select class="form-control" id="originSelect">
+                <option value='unknown'>no especifica</option>
+                <option value='refered'>referido</option>
+                <option value='former-customer'>cliente anterior</option>
+                <option value='offline'>offline/negocio</option>
+                <option value='social'>redes sociales</option>
+                <option value='mail'>mail</option>
+                <option value='ecommerce'>ecommerce</option>
+                <option value='street'>vía pública</option>
+              </select>
+            </div>
+        </div>
+        
         <div class="hr-line-dashed"></div>
         <div class="form-group">
           <div class="col-sm-8 col-sm-offset-2">
             <span class="btn btn-default js-cancel">Cancelar</span>
             <button class="btn btn-success js-save" type="submit">Guardar</button>
+            <span class="text--red" id="summary"></span>
           </div>
         </div>
       </form>
