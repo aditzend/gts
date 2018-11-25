@@ -1,14 +1,13 @@
- <template name="Car_show">
+<template name="Car_show">
   <div class=" {{#if showingOptionButtons}}js-hide-option-buttons{{else}}js-show-option-buttons{{/if}}">
     <div class='row'>
       <div class='col-xs-12 col-md-12 col-lg-12'>
         <p class='text-right'>
           <h1 class="text-big"><strong>{{car.plate}}</strong></h1>
-          <!-- <h2>{{brand}} {{model}} {{year}}</h2> -->
-          <!-- <p class="text-muted">Hace {{daylyKm}} km/día</p>  -->
-            <p class="text-uppercase"> {{car.carOwner.givenName}} {{car.carOwner.lastName}}</p>
-            <!-- <p class="text-small"> {{carOwner.email}} {{carOwner.phone}}</p> -->
-            <!-- <p class="text-small"> {{transDate carOwner.birthdate}}</p> -->
+          <h2>{{car.brand}} {{car.model}} {{car.year}}</h2>
+          <p class="text-muted">Hace {{daylyKm}} km/día</p> 
+            <p class="text-small"> Email: {{car.carOwner.email}} Tel: {{car.carOwner.phone}}</p>
+            <p class="text-small"> Cumple: {{transDate car.carOwner.birthdate}}</p>
         </p>
         <hr>
         <p class="text-left"> 

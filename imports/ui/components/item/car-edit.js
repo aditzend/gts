@@ -117,20 +117,18 @@ Template.Car_edit.onRendered(function() {
             submitHandler: function (errorMap, errorList) {
                     console.log('form submited')
                     // const w = workfor('item-motor-edit.js');
-                    let plate = instance.$('#plateInput').val();
-                    let brand = instance.$('#brandInput').val();
-                    let model = instance.$('#modelInput').val();
-                    let year = instance.$('#yearInput').val();
-                    let km = instance.$('#kmInput').val();
-                    let givenName = instance.$('#givenNameInput').val();
-                let lastName = instance.$('#lastNameInput').val();
-                let birthdate = instance.$('#BirthdateInput').val();
-
-                    // let gender = instance.$('#car-owner-gender').val();
-                let isMale = instance.$('#carOwnerGenderInputMale').checked;
+                    let plate = instance.$('#plateInput').val().toUpperCase();
+                    let brand = instance.$('#brandInput').val().toUpperCase();
+                    let model = instance.$('#modelInput').val().toUpperCase();
+                    let year = instance.$('#yearInput').val().toUpperCase();
+                    let km = instance.$('#kmInput').val().toUpperCase();
+                    let givenName = instance.$('#givenNameInput').val().toUpperCase();
+                    let lastName = instance.$('#lastNameInput').val().toUpperCase();
+                    let birthdate = instance.$('#birthdateInput').val().toUpperCase();
+                    let isMale = instance.$('#genderInputMale').is(':checked');
                     let email = instance.$('#emailInput').val();
-                    let phone = instance.$('#car-owner-phone').val();
-                    let origin = instance.$('#originSelect').val();
+                    let phone = instance.$('#phoneInput').val();
+                    let origin = instance.$('#originSelect').val().toUpperCase();
 
 
                     if (car._id == undefined) {
@@ -172,7 +170,6 @@ Template.Car_edit.onRendered(function() {
                                     givenName: givenName,
                                     lastName: lastName,
                                     isMale: isMale,
-                                    // gender: gender,
                                     birthdate: birthdate,
                                     email: email,
                                     phone: phone

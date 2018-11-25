@@ -56,10 +56,10 @@
             </div>
             <div class="form-group col-lg-3 col-xs-12">
               <!-- <label class="control-label" for='carOwnerGender'>Género</label> -->
-              <span class="control-label"><i class="fa fa-male"></i></span><input id='carOwnerGenderInputMale' type="radio" name="carOwnerGender"
+              <span class="control-label"><i class="fa fa-male"></i></span><input id='genderInputMale' type="radio" name="gender"
                  {{male}} />
-              <span class="control-label"><i class="fa fa-female"></i></span><input id='carOwnerGenderInputFemale' type="radio"
-                name="carOwnerGender" {{female}} />
+              <span class="control-label"><i class="fa fa-female"></i></span><input id='genderInputFemale' type="radio"
+                name="gender" {{female}} />
               <!-- <input id='car-owner-gender' type="text" class="form-control"  value="{{car.carOwner.gender}}"> -->
               <!-- hay que reconvertir la base, porque ahora es un campo de texto y es un quilombo -->
               <span class='form-control-feedback'></span>
@@ -67,7 +67,7 @@
             </div>
             <div class="form-group col-lg-3 col-xs-12">
               <label class="control-label" for='birthdate'>Cumple</label>
-              <input id='carOwnerBirthdateInput' type="date" class="form-control" name="birthdate" value="{{car.carOwner.birthdate}}">
+              <input id='birthdateInput' type="date" class="form-control" name="birthdate" value="{{car.carOwner.birthdate}}">
               <span class='form-control-feedback'></span>
               <span class='help-block'></span>
             </div>
@@ -82,13 +82,13 @@
             </div>
             <div class="form-group col-lg-4 col-xs-12">
               <label class="control-label" for='phone'>Teléfono</label>
-              <input id='car-owner-phone' type="tel" class="form-control" name="phone" value="{{car.carOwner.phone}}">
+              <input id='phoneInput' type="tel" class="form-control" name="phone" value="{{car.carOwner.phone}}">
               <span class='form-control-feedback'></span>
               <span class='help-block'></span>
             </div>
             <div class="form-group col-lg-4 col-xs-12">
-              <label for="originSelect">Cómo nos conoció?</label>
-              <select class="form-control" id="originSelect">
+              <label for="origin">Cómo nos conoció?</label>
+              <select class="form-control" id="originSelect" name="origin">
                 <option value='unknown'>no especifica</option>
                 <option value='refered'>referido</option>
                 <option value='former-customer'>cliente anterior</option>
@@ -106,7 +106,7 @@
           <div class="col-sm-8 col-sm-offset-2">
             <span class="btn btn-default js-cancel">Cancelar</span>
             <button class="btn btn-success js-save" type="submit">Guardar</button>
-            <span class="text--red" id="summary"></span>
+            <span class="danger" id="summary"></span>
           </div>
         </div>
       </form>
