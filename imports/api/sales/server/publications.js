@@ -4,3 +4,7 @@ Meteor.publish("sales.own",
             owner: company
         });
     });
+Meteor.publish("sales.all",
+    function (company) {
+        return Sales.find();
+    });
