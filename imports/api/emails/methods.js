@@ -119,24 +119,31 @@ Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.g
         let now = new Date();
         now = now.toISOString();
         let jobs = Emails.find({
-            dueDate: {
-                $lt: now
-            },
-            status: {$ne: "SENT"}
+            $and: [
+                {
+                    dueDate: { $lt: now }
+                },
+                {
+                    status: { $ne: "SENT" }
+                },
+                {
+                    status: { $ne: "MISSED" }
+                }
+            ]
         });
         jobs.map(j => {
-            const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>':'Lubritodo <info@lubritodo.com>';
+            const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>' : 'Lubritodo <info@lubritodo.com>';
             console.log(`sending email to  ${j.givenName} and id ${j._id}`);
-            let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${j.family} \n Que tengas un excelente día! `;
+            let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
             const data = {
-                  from: from,
-                  to: j.email,
-                  subject: 'Aviso de recambio!',
-                  text: text
-              };
+                from: from,
+                to: j.email,
+                subject: 'Aviso de recambio!',
+                text: text
+            };
             Meteor.call('sendMailgun', j._id, data);
-            Sales.update({_id:j.sale}, {$set : {status:"EXPIRED"}});
-            }
+            Sales.update({ _id: j.sale }, { $set: { status: "EXPIRED" } });
+        }
         )
     }
 });
