@@ -114,6 +114,16 @@ Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.g
             sale: sale,
             status: "STORED"
         });
+          Emails.insert({
+              email: email,
+              givenName: givenName,
+              family: family,
+              dueDate: moment().toISOString(),
+              owner: owner,
+              sale: sale,
+              status: "STORED",
+              type: "SALE"
+          });
     },
     checkEmailJobs() {
         let now = new Date();
@@ -145,5 +155,18 @@ Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.g
             Sales.update({ _id: j.sale }, { $set: { status: "EXPIRED" } });
         }
         )
+       
+            saleJobs.map(j => {
+                const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>' : 'Lubritodo <info@lubritodo.com>';
+                console.log(`sending email to  ${j.givenName} and id ${j._id}`);
+                let text = `Hola ${j.givenName}, muchas gracias por tu compra. Te avisamos cuando sea hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
+                const data = {
+                    from: from,
+                    to: j.email,
+                    subject: 'Gracias por tu compra!',
+                    text: text
+                };
+                Meteor.call('sendMailgun', j._id, data);
+            })
     }
 });

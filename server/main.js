@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import '/imports/startup/server';
 
 import {
-    Accounts
+    Accounts 
 } from 'meteor/accounts-base';
    
 if (Meteor.isServer) {
