@@ -82,7 +82,7 @@ Template.navigation.events({
         let arr = [];
         sales.map((s) => {
             const car = Cars.findOne(s.car.id)
-            if (s && car.plate) {
+            if (s && car) {
                 arr.push([
                     car.plate,
                     car.brand,
