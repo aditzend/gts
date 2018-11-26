@@ -156,17 +156,17 @@ Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.g
         }
         )
        
-            saleJobs.map(j => {
-                const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>' : 'Lubritodo <info@lubritodo.com>';
-                console.log(`sending email to  ${j.givenName} and id ${j._id}`);
-                let text = `Hola ${j.givenName}, muchas gracias por tu compra. Te avisamos cuando sea hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
-                const data = {
-                    from: from,
-                    to: j.email,
-                    subject: 'Gracias por tu compra!',
-                    text: text
-                };
-                Meteor.call('sendMailgun', j._id, data);
-            })
+            // saleJobs.map(j => {
+            //     const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>' : 'Lubritodo <info@lubritodo.com>';
+            //     console.log(`sending email to  ${j.givenName} and id ${j._id}`);
+            //     let text = `Hola ${j.givenName}, muchas gracias por tu compra. Te avisamos cuando sea hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
+            //     const data = {
+            //         from: from,
+            //         to: j.email,
+            //         subject: 'Gracias por tu compra!',
+            //         text: text
+            //     };
+            //     Meteor.call('sendMailgun', j._id, data);
+            // })
     }
 });

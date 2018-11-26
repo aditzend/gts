@@ -82,30 +82,31 @@ Template.navigation.events({
         let arr = [];
         sales.map((s) => {
             const car = Cars.findOne(s.car.id)
-            console.log(`venta de ${s.owner}`)
-
-            arr.push([
-                car.plate,
-                car.brand,
-                car.model,
-                car.year,
-                car.km,
-                car.origin,
-                car.createdAt,
-                car.author,
-                car.carOwner.givenName,
-                car.carOwner.lastName,
-                car.carOwner.email,
-                car.carOwner.isMale,
-                car.carOwner.birthdate,
-                car.carOwner.phone,
-                s.owner,
-                s.family.name,
-                s.dueDate,
-                s.createdAt,
-                s.status,
-                s.author
-            ])
+            if (s && car.plate) {
+                arr.push([
+                    car.plate,
+                    car.brand,
+                    car.model,
+                    car.year,
+                    car.km,
+                    car.origin,
+                    car.createdAt,
+                    car.author,
+                    car.carOwner.givenName,
+                    car.carOwner.lastName,
+                    car.carOwner.email,
+                    car.carOwner.isMale,
+                    car.carOwner.birthdate,
+                    car.carOwner.phone,
+                    s.owner,
+                    s.family.name,
+                    s.dueDate,
+                    s.createdAt,
+                    s.status,
+                    s.author
+                ])
+            }
+            
         });
         let csv = Papa.unparse({
             fields: [
@@ -133,7 +134,6 @@ Template.navigation.events({
         });
         const blob = new Blob([csv], {type: "text/plain;charset=utf-8;"})
         saveAs(blob, "GTS-Reporte.csv")
-        console.log('report')
 
     },
     'click .js-show-treasury': function() {
