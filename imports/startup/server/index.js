@@ -6,8 +6,9 @@ import './register-api.js';
 
 
 
-// import './connection.js';
-// import './importer.js';
+import './connection.js';
+import './importer.js';
+import './csvParse.js'
 
 // EmailGenerator = {};
 // 
@@ -31,9 +32,8 @@ import './register-api.js';
 
 Meteor.startup(function() {
     // Meteor.call("cars.correct")
-    // Meteor.call("importSql");
-    // process.env.MAIL_URL = Meteor.settings.smtp;
-    // process.env.ixDbPass = Meteor.settings.ixDbPass;
+    Meteor.call("csvParse");
+    
     // const sauserid = Meteor.settings.serabey_sauserid;
     // console.log("sauserid", sauserid);
 

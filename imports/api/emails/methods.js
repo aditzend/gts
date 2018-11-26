@@ -46,6 +46,7 @@ Meteor.methods({
     },
     saveEmailJob(email, givenName, family, dueDate, owner, sale) {
         console.log('SAVING EMAIL JOB');
+        const status = moment().isAfter(dueDate)? "MISSED" : "STORED"
         Emails.insert({
             email: email,
             givenName: givenName,
@@ -53,17 +54,24 @@ Meteor.methods({
             dueDate: dueDate,
             owner: owner,
             sale: sale,
-            status: "STORED"
+            status: status
         });
     },
     checkEmailJobs() {
         let now = new Date();
         now = now.toISOString();
         let jobs = Emails.find({
-            dueDate: {
-                $lt: now
-            },
-            status: {$ne: "SENT"}
+            $and: [
+                 { 
+                     dueDate: { $lt: now }
+                 }, 
+                 {
+                     status: { $ne: "SENT" }
+                 },
+                 {
+                     status: { $ne: "MISSED" }
+                 }
+            ]
         });
         jobs.map(j => {
             const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>':'Lubritodo <info@lubritodo.com>';

@@ -1,14 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import mysql from 'mysql';
 
-const conn = function (offset) {
+const conn = function () {
     console.log("connecting to sql db");
     const promise = new Promise(function (resolve, reject) {
         const connection = mysql.createConnection({
-            host: '98.130.0.77',
-            user: 'pross88_gtreader',
-            password: 'Tld,al730ml.',
-            database: 'pross88_gtsystem',
+            host: 'serabey.com',
+            user: 'alexa176_gtsusr',
+            password: 'SGxIvRe0Q8-z',
+            database: 'alexa176_gts',
             insecureAuth: "true"
         });
         connection.connect(function (err) {
@@ -17,7 +17,7 @@ const conn = function (offset) {
                 reject(err.stack);
             } else {
                 console.log('connected to db');
-                resolve(connection);
+                resolve(connection)
             }
         });
     });//connect

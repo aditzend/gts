@@ -1,7 +1,7 @@
 const sqlQuery = function (connObj) {
     console.log("quering connection");
     const promise = new Promise(function (resolve, reject) {
-        console.log("connection is ", connObj.conn.threadId);
+        console.log("connection is ", connObj.connectionData.threadId);
         const offset = String(connObj.offset);
         const selector = 'select \
         usuarios.name_usr,\
@@ -21,14 +21,19 @@ const sqlQuery = function (connObj) {
         on usuarios.ID_usr = usr_pro.ID_usr\
         inner join productos\
         on productos.ID_pro = usr_pro.ID_pro\
-          limit 1 offset ' + offset + ' ;';
-        connObj.conn.query(selector,
+          limit 2 offset ' + offset + ' ;';
+        connObj.connectionData.query(selector,
             function (err, rows, fields) {
                 if (err) {
                     reject(err);
                 } else {
                     console.log("query ok, rows returned = ", rows.length);
-                    const result = { "connection": connObj.conn, "rows": rows , "owner": connObj.owner};
+                    const result = {
+                        "connectionData": connObj.connectionData,
+                        "rows": rows ,
+                        "owner": connObj.owner,
+                        "offset": connObj.offset,
+                    };
                     resolve(result);
                 }
             });

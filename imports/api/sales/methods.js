@@ -41,6 +41,34 @@ function dueDate(exchange, uom, saleCreatedAt, dailyKm) {
 
 
 Meteor.methods({
+    'sales.insertWithDateAndDkm' (data) {
+        check(data, Object);
+        const car = Cars.findOne({ _id: data.car.id });
+        const family = Families.findOne({ _id: data.family.id });
+        const dkm = data.dkm;
+        const due = dueDate(family.exchange,
+            family.uom,
+            // "2018-05-02T02:59:10.567Z",
+            data.originalCreatedAt,
+            dkm);
+        const purchased = moment(data.originalCreatedAt).toISOString()
+      
+        const sale = Sales.insert({
+            car: {
+                id: car._id
+            },
+            family: {
+                id: family._id,
+                name: family.name
+            },
+            dueDate: due,
+            originalCreatedAt: moment(data.originalCreatedAt).toISOString(),
+            // createdAt: moment().toISOString(),
+            owner: family.owner,
+            status: "ALIVE"
+        });
+        Meteor.call('saveEmailJob', car.carOwner.email, car.carOwner.givenName, family.name, due, family.owner, sale);
+    },
     'sales.insertWithDate' (data) {
         check(data, Object);
         const car = Cars.findOne({ _id: data.car.id });
