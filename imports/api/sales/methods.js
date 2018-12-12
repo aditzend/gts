@@ -150,6 +150,7 @@ Meteor.methods({
         })
     },
     'sales.insert' (data) {
+        console.log('INSERTING SALE');
         check(data, Object);
         const car = Cars.findOne({_id: data.car.id});
         const family = Families.findOne({_id: data.family.id});

@@ -112,18 +112,19 @@ Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.g
             dueDate: dueDate,
             owner: owner,
             sale: sale,
-            status: "STORED"
+            status: "STORED",
+            type: "SALE"
         });
-          Emails.insert({
-              email: email,
-              givenName: givenName,
-              family: family,
-              dueDate: moment().toISOString(),
-              owner: owner,
-              sale: sale,
-              status: "STORED",
-              type: "SALE"
-          });
+        //   Emails.insert({
+        //       email: email,
+        //       givenName: givenName,
+        //       family: family,
+        //       dueDate: moment().toISOString(),
+        //       owner: owner,
+        //       sale: sale,
+        //       status: "STORED",
+        //       type: "SALE"
+        //   });
     },
     checkEmailJobs() {
         let now = new Date();
@@ -143,7 +144,8 @@ Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.g
         });
         jobs.map(j => {
             const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>' : 'Lubritodo <info@lubritodo.com>';
-            console.log(`sending email to  ${j.givenName} and id ${j._id}`);
+            console.log(`sending email to  ${j.givenName} , sale id ${j.sale} and email id ${j._id}`);
+            console.log(`Now is  ${now}`);
             let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
             const data = {
                 from: from,

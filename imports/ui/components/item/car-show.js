@@ -48,6 +48,8 @@ Template.Car_show.onCreated(function() {
 
 
 Template.Car_show.helpers({
+    formatDate(iso) {
+        return moment(iso).format('D.MMMYYYY')    },
 
     //no confundir con la funcion
     dailyKm(km, year) {
