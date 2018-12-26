@@ -42,6 +42,7 @@ Gracias por confiar en nosotros.\n
 El mejor servicio, en menor tiempo, al mejor precio.\n
 GOMATODO SRL \n
 www.gomatodo.com \n
+https://www.facebook.com/pg/GomatodoGT/reviews/ \n
 Gomatodo es un Centro Integral de Servicios \n
 Dirección: Hipólito Yrigoyen 1905, Florida(Link a Google Maps) \n
 Horarios de atención: Lun a Vie de 8 a 20 hs y sábados de 8 a 14 hs.`
@@ -64,6 +65,7 @@ El mejor servicio, en menor tiempo, al mejor precio.\n
 
 LUBRITODO SRL\n
 www.lubritodo.com\n
+https://www.facebook.com/pg/LubritodoOficial/reviews/\n
 info@lubritodo.com\n
 Lubritodo es un Centro Integral de Lubricación\n
 Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.gl/maps/1d7VaEpFzqn)\n
