@@ -1,6 +1,9 @@
 // import { Email } from 'meteor/email';
 import { Mailgun } from "meteor/risul:mailgun";
 
+import thankMailGomatodo from "./templates/thankMailGomatodo"
+import thankMailLubritodo from "./templates/thankMailLubritodo"
+import renewalNotice from "./templates/renewalNotice"
 // Meteor.methods({
 //
 //
@@ -37,43 +40,9 @@ Meteor.methods({
     const styledGivenName =
       givenName.charAt(0) + givenName.slice(1).toLowerCase();
 
-    const gomatodoText = `¡Hola ${styledGivenName} muchas gracias por tu compra! \n Por este medio te avisaremos cuando se acerque la fecha en que debas hacer el recambio de ${family}.\nVALORAMOS TU OPINIÓN \n
-        ¿Cuánto te gusta Gomatodo ?¡Agréganos a Facebook y déjanos tu opinión!(Link a Facebook: https://www.facebook.com/GomatodoGT/) \n
-            SE PARTE DE LA COMUNIDAD GT \n
-Registrate en nuestra web www.gomatodo.com y aprovechá nuestros descuentos exclusivos on line.\n
-Gracias por confiar en nosotros.\n
-        Gomatodo  \n
-El mejor servicio, en menor tiempo, al mejor precio.\n
-GOMATODO SRL \n
-www.gomatodo.com \n
-https://www.facebook.com/pg/GomatodoGT/reviews/ \n
-Gomatodo es un Centro Integral de Servicios \n
-Dirección: Hipólito Yrigoyen 1905, Florida(Link a Google Maps) \n
-Horarios de atención: Lun a Vie de 8 a 20 hs y sábados de 8 a 14 hs.`;
+    const gomatodoText = thankMailGomatodo(styledGivenName,family)
 
-    const lubritodoText = `¡Hola ${styledGivenName} muchas gracias por tu compra!\n
-
-Por este medio te avisaremos cuando se acerque la fecha en que debas hacer el recambio de ${family}.\n
-
-
-VALORAMOS TU OPINIÓN\n
-¿Cuánto te gusta Lubritodo ?¡Agréganos a Facebook y déjanos tu opinión!(Link a Facebook: https://www.facebook.com/LubritodoOficial/)\n
-
-    SE PARTE DE LA COMUNIDAD GT\n
-Registrate en nuestra web www.lubritodo.com y aprovechá nuestros descuentos exclusivos on line.\n
-
-Gracias por confiar en nosotros.\n
-
-        Lubritodo \n
-El mejor servicio, en menor tiempo, al mejor precio.\n
-
-LUBRITODO SRL\n
-www.lubritodo.com\n
-https://www.facebook.com/pg/LubritodoOficial/reviews/\n
-info@lubritodo.com\n
-Lubritodo es un Centro Integral de Lubricación\n
-Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.gl/maps/1d7VaEpFzqn)\n
-    Horarios de atención: Lun a Vie de 8 a 18 hs y sábados de 8 a 14 hs`;
+    const lubritodoText = thankMailLubritodo(styledGivenName,family)
 
     const text = owner === "Gomatodo" ? gomatodoText : lubritodoText;
 
@@ -163,27 +132,7 @@ Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.g
         }`
       );
       console.log(`Now is  ${now}`);
-      let text = `Hola ${j.givenName}, te avisamos que es hora de cambiar ${
-        j.family
-      } \n Que tengas un excelente dia! \n
-      VALORAMOS TU OPINIÓN\n
-¿Cuánto te gusta Lubritodo ?¡Agréganos a Facebook y déjanos tu opinión!(Link a Facebook: https://www.facebook.com/LubritodoOficial/)\n
-
-    SE PARTE DE LA COMUNIDAD GT\n
-Registrate en nuestra web www.lubritodo.com y aprovechá nuestros descuentos exclusivos on line.\n
-
-Gracias por confiar en nosotros.\n
-
-        Lubritodo \n
-El mejor servicio, en menor tiempo, al mejor precio.\n
-
-LUBRITODO SRL\n
-www.lubritodo.com\n
-https://www.facebook.com/pg/LubritodoOficial/reviews/\n
-info@lubritodo.com\n
-Lubritodo es un Centro Integral de Lubricación\n
-Dirección: Hipólito Yrigoyen 1999, Florida(Link a Google Maps: \nhttps://goo.gl/maps/1d7VaEpFzqn)\n
-    Horarios de atención: Lun a Vie de 8 a 18 hs y sábados de 8 a 14 hs;
+      let text = renewalNotice(j.givenName, j.family)
       const data = {
         from: from,
         to: j.email,
