@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "babel-runtime": "^6.26.0",
     "bcrypt": "^2.0.1",
     "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/bootstrap-datetimepicker.git",
