@@ -10,14 +10,14 @@ import {
 import moment from 'moment/moment';
 
 
-const calculateKmsPerDay = function(km, purchaseYear, entryDate) {
+const calculateKmsPerDay = function (km, purchaseYear, entryDate) {
     const entryDateM = moment(entryDate)
     console.log('TCL: calculateKmsPerDay -> entryDate', entryDateM);
     const purchaseDateM = moment(`${purchaseYear}-07-01`)
     console.log('TCL: calculateKmsPerDay -> purchaseDate', purchaseDateM);
     const daysPassedM = entryDateM.diff(purchaseDateM, 'days')
     console.log('TCL: calculateKmsPerDay -> daysPassed', daysPassedM);
-    return Number(km)/Number(daysPassedM)
+    return Number(km) / Number(daysPassedM)
 
 }
 
@@ -38,13 +38,13 @@ function dueDate(exchange, uom, saleCreatedAt, dkm) {
             add = exchange;
             unit = 'months'
     }
-    console.log(`Due Date: ${moment(saleCreatedAt).add(add, unit).toISOString()}` )
+    console.log(`Due Date: ${moment(saleCreatedAt).add(add, unit).toISOString()}`)
     return moment(saleCreatedAt).add(add, unit).toISOString();
 };
 
 
 Meteor.methods({
-    'sales.insertLegacy' (carId, familyN, originallyCreatedAt) {
+    'sales.insertLegacy'(carId, familyN, originallyCreatedAt) {
         check(carId, String)
         check(familyN, Number)
         check(originallyCreatedAt, Date)
@@ -54,8 +54,8 @@ Meteor.methods({
         const family = Families.findOne({ n: familyN })
         const dkm = calculateKmsPerDay(car.km, car.year, originallyCreatedAt)
         console.log('TCL: dkm', dkm);
-        
-        const due = dueDate(family.exchange, family.uom, originallyCreatedAt ,dkm)
+
+        const due = dueDate(family.exchange, family.uom, originallyCreatedAt, dkm)
         console.log('TCL: due', due);
         console.log('TCL: family.uom', family.uom);
         console.log('TCL: family.exchange', family.exchange);
@@ -75,37 +75,37 @@ Meteor.methods({
         })
         console.log('TCL: sale', sale)
     },
-    'sales.insertWithDate' (carId, familyId, originallyCreatedAt) {
+    'sales.insertWithDate'(carId, familyId, originallyCreatedAt) {
         check(carId, String)
         check(familyId, String)
         console.log('TCL: familyId sales.insertWithDate', familyId);
         check(originallyCreatedAt, String)
         const car = Cars.findOne({ _id: carId });
         const family = Families.findOne({ _id: familyId });
-        
+
         const dkm = calculateKmsPerDay(car.km, car.year, originallyCreatedAt)
 
         const due = dueDate(
-                        family.exchange,
-                        family.uom,
-                        originallyCreatedAt,
-                        dkm
-                    );
-      
+            family.exchange,
+            family.uom,
+            originallyCreatedAt,
+            dkm
+        );
+
         const sale = Sales.insert({
-                        car: {
-                            id: car._id
-                        },
-                        family: {
-                            id: family._id,
-                            name: family.name
-                        },
-                        dueDate: due,
-                        originallyCreatedAt: moment(originallyCreatedAt).toISOString(),
-                        // createdAt: moment().toISOString(),
-                        owner: family.owner,
-                        status: "TRANSFORMED"
-                    });
+            car: {
+                id: car._id
+            },
+            family: {
+                id: family._id,
+                name: family.name
+            },
+            dueDate: due,
+            originallyCreatedAt: moment(originallyCreatedAt).toISOString(),
+            // createdAt: moment().toISOString(),
+            owner: family.owner,
+            status: "TRANSFORMED"
+        });
 
         Meteor.call(
             'saveEmailJob',
@@ -117,7 +117,7 @@ Meteor.methods({
             sale
         )
     },
-    'cars.correct' () {
+    'cars.correct'() {
         console.log(`correcting cars`);
         Cars.find({
             createdAt: {
@@ -149,19 +149,19 @@ Meteor.methods({
             }
         })
     },
-    'sales.insert' (data) {
+    'sales.insert'(data) {
         console.log('INSERTING SALE');
         check(data, Object);
-        const car = Cars.findOne({_id: data.car.id});
-        const family = Families.findOne({_id: data.family.id});
-        
-        const dkm = calculateKmsPerDay(car.km,car.year,car.createdAt);
-        
+        const car = Cars.findOne({ _id: data.car.id });
+        const family = Families.findOne({ _id: data.family.id });
+
+        const dkm = calculateKmsPerDay(car.km, car.year, car.createdAt);
+
 
         const due = dueDate(family.exchange,
-                            family.uom,
-                            moment().toISOString(),
-                        dkm);
+            family.uom,
+            moment().toISOString(),
+            dkm);
         if (!Meteor.user()) {
             throw new Meteor.Error("no autorizado");
         }
@@ -176,17 +176,23 @@ Meteor.methods({
             dueDate: due,
             createdAt: moment().toISOString(),
             owner: family.owner,
-            status:"ALIVE"
+            status: "ALIVE"
         });
         Meteor.call('sendThankYouEmail', car.carOwner.email, car.carOwner.givenName, family.name, family.owner)
-        Meteor.call('saveEmailJob',car.carOwner.email,car.carOwner.givenName,family.name,due,family.owner, sale);
+        Meteor.call('saveEmailJob', car.carOwner.email, car.carOwner.givenName, family.name, due, family.owner, sale);
     },
     'sales.delete'(id) {
-           if (!Meteor.user()) {
-               throw new Meteor.Error("no autorizado");
-           }
-           Sales.remove({
-              _id:id
-           });
-    }
+        if (!Meteor.user()) {
+            throw new Meteor.Error("no autorizado");
+        }
+        Sales.remove({
+            _id: id
+        });
+    },
+    'sales.test'(test) {
+        console.log(`you have sent ${test.data}`)
+        console.log(test)
+        return `you have sent ${test.data}`
+    },
+
 });

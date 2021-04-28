@@ -1,7 +1,7 @@
 import './car-sell.html';
 
 
-Template.Car_sell.onCreated(function() {
+Template.Car_sell.onCreated(function () {
     this.autorun(() => {
         this.subscribe("userData");
         if (Meteor.user()) {
@@ -13,12 +13,12 @@ Template.Car_sell.onCreated(function() {
 
 Template.Car_sell.helpers({
     families() {
-        return Families.find({}, {$sort: { createdAt:1}});
+        return Families.find({}, { $sort: { createdAt: 1 } });
     }
 });
 
 Template.Car_sell.events({
-    'click .js-sell': async function(evt, ins) {
+    'click .js-sell': async function (evt, ins) {
         const saleData = {
             car: {
                 id: ins.data.carId
@@ -32,29 +32,32 @@ Template.Car_sell.events({
 
         const priorSale = Sales.findOne({
             'car.id': saleData.car.id,
-            'family.id':saleData.family.id,
+            'family.id': saleData.family.id,
             'status': 'ALIVE'
         });
 
+
         if (priorSale) {
-         swal({
-             title: `Ya vendimos ${saleData.family.name} a este auto!`,
-             text: `El auto tiene  ${saleData.family.name} vigente`,
-             type: "warning",
-             showCancelButton: false,
-             confirmButtonColor: "#DD6B55",
-             confirmButtonText: "Ok",
-             // cancelButtonText: "No, cancelar por favor!",
-             closeOnConfirm: true,
-             closeOnCancel: true
-         });
+            swal({
+                title: `Ya vendimos ${saleData.family.name} a este auto!`,
+                text: `El auto tiene  ${saleData.family.name} vigente`,
+                type: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ok",
+                // cancelButtonText: "No, cancelar por favor!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            });
         } else {
+            console.log('sales.insert', saleData)
+
             Meteor.call('sales.insert', saleData);
         }
 
-        
-       
-        
-        
+
+
+
+
     }
 })
