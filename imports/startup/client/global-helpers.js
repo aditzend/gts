@@ -1,54 +1,54 @@
 
-Template.registerHelper("pathFor", function(routeName,params,queryParams){
+Template.registerHelper("pathFor", function (routeName, params, queryParams) {
   const path = FlowRouter.path(routeName, params, queryParams);
   return path;
 });
 
-Template.registerHelper('nameGetter', function(id) {
+Template.registerHelper('nameGetter', function (id) {
   let c = Companies.findOne(id);
   return c.name;
 });
-Template.registerHelper("formatDate", function(D, M, Y) {
+Template.registerHelper("formatDate", function (D, M, Y) {
   return moment([Y, M, D]).format('DD / MM / YYYY');
 });
 
 
-Template.registerHelper("appname", function() {
-  return 'GT System';
+Template.registerHelper("appname", function () {
+  return 'GT System v4.0.2';
 });
-Template.registerHelper("logo", function() {
+Template.registerHelper("logo", function () {
   const company = workfor('logo helper at global-helpers');
   // return (company)? company.logo : false;
   return 'logos/logothesa.png';
 });
-Template.registerHelper("timeFromCreation", function(createdAt) {
+Template.registerHelper("timeFromCreation", function (createdAt) {
   return moment(createdAt).fromNow();
 });
-Template.registerHelper("timeForPayment", function(createdAt,plusDays,minusDays) {
+Template.registerHelper("timeForPayment", function (createdAt, plusDays, minusDays) {
   return moment(createdAt).add(plusDays, 'days').subtract(minusDays, 'days').fromNow();
 });
-Template.registerHelper("formatAsNumber", function(number) {
+Template.registerHelper("formatAsNumber", function (number) {
   return numeral(number).format('0,0');
 
 });
 
 
-Template.registerHelper("deleting", function() {
+Template.registerHelper("deleting", function () {
   return Session.get('deleting');
 });
 
-Template.registerHelper("editing", function() {
+Template.registerHelper("editing", function () {
   return Session.get('editing');
 });
 
-Template.registerHelper("editingId", function(id) {
+Template.registerHelper("editingId", function (id) {
   return (Session.get('editing') === id) ? true : false;
 });
 
-Template.registerHelper("thisId", function() {
+Template.registerHelper("thisId", function () {
   return this._id;
 });
-Template.registerHelper("relTypeTranslate", function(relType) {
+Template.registerHelper("relTypeTranslate", function (relType) {
   switch (relType) {
     case 'SUPL':
       return 'CLIENTE';
@@ -65,11 +65,11 @@ Template.registerHelper("relTypeTranslate", function(relType) {
 
 });
 
-Template.registerHelper("getRelType", function() {
+Template.registerHelper("getRelType", function () {
   return FlowRouter.getQueryParam('relType');
 });
 
-Template.registerHelper("relTypeLink", function(relType) {
+Template.registerHelper("relTypeLink", function (relType) {
   switch (relType) {
     case 'SUPL':
       return 'show-customer';
@@ -84,7 +84,7 @@ Template.registerHelper("relTypeLink", function(relType) {
 
 });
 
-Template.registerHelper("placeTypeOptions", function() {
+Template.registerHelper("placeTypeOptions", function () {
   return [{
     label: 'la oficina principal',
     value: 1
@@ -94,9 +94,9 @@ Template.registerHelper("placeTypeOptions", function() {
   }, {
     label: 'donde se retiran pagos',
     value: 3
-  }, ];
+  },];
 });
-Template.registerHelper("classPlaceTypeOption", function(val) {
+Template.registerHelper("classPlaceTypeOption", function (val) {
   switch (val) {
     case '1':
       return 'fa fa-building';
@@ -113,7 +113,7 @@ Template.registerHelper("classPlaceTypeOption", function(val) {
   }
 });
 
-Template.registerHelper("convertPlaceTypeOption", function(val) {
+Template.registerHelper("convertPlaceTypeOption", function (val) {
   switch (val) {
     case '100':
       return "OFICINA PRINCIPAL";
@@ -132,7 +132,7 @@ Template.registerHelper("convertPlaceTypeOption", function(val) {
       break;
   }
 });
-Template.registerHelper("countryOptions", function() {
+Template.registerHelper("countryOptions", function () {
   return [{
     label: 'Argentina',
     value: 'AR'
@@ -171,19 +171,19 @@ Template.registerHelper("countryOptions", function() {
 });
 
 
-Template.registerHelper("getGender", function(isMale) {
+Template.registerHelper("getGender", function (isMale) {
   return (isMale === "1") ? true : false;
 });
 
-Template.registerHelper("formatInternational", function(phone) {
+Template.registerHelper("formatInternational", function (phone) {
   const country = Phoneformat.countryForE164Number(phone) || 'AR';
   return Phoneformat.formatInternational(country, phone);
 });
-Template.registerHelper("phoneCountry", function(phone) {
+Template.registerHelper("phoneCountry", function (phone) {
   return Phoneformat.countryForE164Number(phone) || 'AR';
 
 });
 
-Template.registerHelper("not", function(argument) {
+Template.registerHelper("not", function (argument) {
   return !argument;
 });

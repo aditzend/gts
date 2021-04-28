@@ -1,29 +1,11 @@
 // import { Email } from 'meteor/email';
 import { Mailgun } from "meteor/risul:mailgun";
 
-import thankMailGomatodo from "./templates/thankMailGomatodo"
-import thankMailLubritodo from "./templates/thankMailLubritodo"
+import thankPurchase from "./templates/thankPurchase"
 import renewalNotice from "./templates/renewalNotice"
-// Meteor.methods({
-//
-//
-//     sendEmail: function() {
-//         //  const tasks = Tasks.find({}).fetch();
-//         const emailData = {
-//             mainTitle: "Bienvenido a RAIZ DISCOS",
-//             //tasks: tasks,
-//             unsubscribe: "http://app.raiz-discos.com/unsubscribe"
-//         };
-//
-//         const body = EmailGenerator.generateHtml("billing", emailData);
-//
-//         Meteor.call("sendMailgunEmail",
-//             "info@estudio-raiz.com",
-//             "RAIZ DISCOS", ["pross888@gmail.com"],
-//             "Te damos la bienvenida!",
-//             body);
-//     }
-// })
+
+
+
 
 Meteor.methods({
   "email.test"(id) {
@@ -32,36 +14,45 @@ Meteor.methods({
   },
   sendThankYouEmail(email, givenName, family, owner) {
     console.log("sending thank you email");
-    const from =
-      owner === "Gomatodo"
-        ? "Gomatodo <info@gomatodo.com>"
-        : "Lubritodo <info@lubritodo.com>";
-
-    const styledGivenName =
-      givenName.charAt(0) + givenName.slice(1).toLowerCase();
-
-    const gomatodoText = thankMailGomatodo(styledGivenName,family)
-
-    const lubritodoText = thankMailLubritodo(styledGivenName,family)
-
-    const text = owner === "Gomatodo" ? gomatodoText : lubritodoText;
-
-    const data = {
-      from: from,
-      to: email,
-      subject: "Gracias por tu compra!",
-      text: text
-    };
-    Mailgun.messages().send(
-      data,
-      Meteor.bindEnvironment((error, body) => {
-        if (error) {
-          console.log(`error sending ${error}`);
-        }
-      })
-    );
+    if (Meteor.isServer) {
+      const styledGivenName =
+        givenName.charAt(0) + givenName.slice(1).toLowerCase();
+      const ownerData = Meteor.settings.owners[owner]
+      const from = `${owner} <${ownerData.email}>`
+      const text = thankPurchase(
+        styledGivenName,
+        family,
+        owner,
+        ownerData.formalName,
+        ownerData.facebookPage,
+        ownerData.site,
+        ownerData.facebookReviewsPage,
+        ownerData.email,
+        ownerData.description,
+        ownerData.address,
+        ownerData.attentionSchedule
+      )
+      const destinationEmail = Meteor.settings.environment === "PRODUCTION" ? email : Meteor.settings.testingEmail
+      const data = {
+        from: from,
+        to: destinationEmail,
+        subject: "Gracias por tu compra!",
+        text: text
+      };
+      console.log(data)
+      Mailgun.messages().send(
+        data,
+        Meteor.bindEnvironment((error, body) => {
+          if (error) {
+            console.log(`error sending ${error}`);
+          }
+        })
+      );
+    }
   },
   sendMailgun(jobId, data) {
+    console.log('sendMailgun')
+    console.log(data)
     Mailgun.messages().send(
       data,
       Meteor.bindEnvironment((error, body) => {
@@ -77,15 +68,19 @@ Meteor.methods({
               }
             }
           );
+        } else {
+          Emails.update({ _id: jobId }, { $set: { status: "SENT" } });
         }
-        Emails.update({ _id: jobId }, { $set: { status: "SENT" } });
       })
     );
   },
   saveEmailJob(email, givenName, family, dueDate, owner, sale) {
+
     console.log("SAVING EMAIL JOB");
+    const destinationEmail = Meteor.settings.environment === "PRODUCTION" ? email : Meteor.settings.testingEmail
+
     Emails.insert({
-      email: email,
+      email: destinationEmail,
       givenName: givenName,
       family: family,
       dueDate: dueDate,
@@ -94,18 +89,11 @@ Meteor.methods({
       status: "STORED",
       type: "SALE"
     });
-    //   Emails.insert({
-    //       email: email,
-    //       givenName: givenName,
-    //       family: family,
-    //       dueDate: moment().toISOString(),
-    //       owner: owner,
-    //       sale: sale,
-    //       status: "STORED",
-    //       type: "SALE"
-    //   });
+
+
   },
   checkEmailJobs() {
+    console.log('CHECKING EMAIL JOBS')
     let now = new Date();
     now = now.toISOString();
     let jobs = Emails.find({
@@ -122,38 +110,44 @@ Meteor.methods({
       ]
     });
     jobs.map(j => {
-      const from =
-        j.owner === "Gomatodo"
-          ? "Gomatodo <info@gomatodo.com>"
-          : "Lubritodo <info@lubritodo.com>";
+
+      const ownerData = Meteor.settings.owners[j.owner]
+      const from = `${j.owner} <${ownerData.email}>`
+      const destinationEmail = Meteor.settings.environment === "PRODUCTION" ? j.email : Meteor.settings.testingEmail
+      const styledGivenName =
+        j.givenName.charAt(0) + j.givenName.slice(1).toLowerCase();
+      // const from =
+      //   j.owner === "Gomatodo"
+      //     ? "Gomatodo <info@gomatodo.com>"
+      //     : "Lubritodo <info@lubritodo.com>";
       console.log(
-        `sending email to  ${j.givenName} , sale id ${j.sale} and email id ${
-          j._id
+        `sending email to  ${styledGivenName} , sale id ${j.sale} and email id ${j._id
         }`
       );
       console.log(`Now is  ${now}`);
-      let text = renewalNotice(j.givenName, j.family)
+      // let text = renewalNotice(j.givenName, j.family)
+      const text = renewalNotice(
+        styledGivenName,
+        j.family,
+        j.owner,
+        ownerData.formalName,
+        ownerData.facebookPage,
+        ownerData.site,
+        ownerData.facebookReviewsPage,
+        ownerData.email,
+        ownerData.description,
+        ownerData.address,
+        ownerData.attentionSchedule
+      )
       const data = {
         from: from,
-        to: j.email,
+        to: destinationEmail,
         subject: "Aviso de recambio!",
         text: text
       };
       Meteor.call("sendMailgun", j._id, data);
+      console.log('mailgun called')
       Sales.update({ _id: j.sale }, { $set: { status: "EXPIRED" } });
     });
-
-    // saleJobs.map(j => {
-    //     const from = (j.owner === "Gomatodo") ? 'Gomatodo <info@gomatodo.com>' : 'Lubritodo <info@lubritodo.com>';
-    //     console.log(`sending email to  ${j.givenName} and id ${j._id}`);
-    //     let text = `Hola ${j.givenName}, muchas gracias por tu compra. Te avisamos cuando sea hora de cambiar ${j.family} \n Que tengas un excelente dia! `;
-    //     const data = {
-    //         from: from,
-    //         to: j.email,
-    //         subject: 'Gracias por tu compra!',
-    //         text: text
-    //     };
-    //     Meteor.call('sendMailgun', j._id, data);
-    // })
   }
 });

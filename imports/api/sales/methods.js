@@ -36,7 +36,15 @@ function dueDate(exchange, uom, saleCreatedAt, dkm) {
             break;
         case "month":
             add = exchange;
-            unit = 'months'
+            unit = 'months';
+            break;
+        case "second":
+            add = exchange;
+            unit = 'seconds';
+            break;
+        default:
+            add = 2;
+            unit = 'years'
     }
     console.log(`Due Date: ${moment(saleCreatedAt).add(add, unit).toISOString()}`)
     return moment(saleCreatedAt).add(add, unit).toISOString();

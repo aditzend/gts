@@ -39,8 +39,9 @@ Meteor.methods({
             owner: data.owner,
         });
         console.log('Family created ', newFamily)
-        return `Family created : ${newFamily}`
-
+        data._id = newFamily
+        // return `Family created!  _id: ${newFamily} data: ${JSON.stringify(data)}`
+        return data
 
     }
 });
